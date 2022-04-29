@@ -10,7 +10,11 @@ public class DataSet {
     private int[] targetNodeIds;
     private int[] sourceToTargetCosts;
 
-    public DataSet(int numberOfNodes, int numberOfEdges) {
+    public DataSet() {
+
+    }
+
+    public void init(int numberOfNodes, int numberOfEdges) {
         this.numberOfNodes = numberOfNodes;
         this.numberOfEdges = numberOfEdges;
 
