@@ -11,9 +11,8 @@ public class Main {
     public static void main(String[] args) {
         long start = System.nanoTime() / 1000000;
 
-        String filePath = "/Users/aminheidari/Documents/Uni/Programmierprojekt/Phase I/bw.fmi";
-        DataSetReader dataSetReader = new DataSetReader();
-        dataSetReader.readDataSet(filePath);
+        String filePath = "/home/marvin/Documents/Studium/SoSe22/Programmierprojekt/datasets/germany.fmi";
+        DataSet dataSet = DataSetReader.readDataSet(filePath);
 
         long duration = System.nanoTime() / 1000000 - start;
         System.out.println("Execution duration in ms: " + duration);

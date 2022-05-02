@@ -6,11 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class DataSetReader {
-    private DataSet dataSet;
 
-    public DataSet readDataSet(String filePath) {
-        dataSet = new DataSet();
+    public static DataSet readDataSet(String filePath) {
         BufferedReader reader;
+        DataSet dataSet = new DataSet();
         try {
             FileReader fileReader = new FileReader(filePath);
             reader = new BufferedReader(fileReader);

@@ -8,31 +8,6 @@ public class DataSet {
 
     private int[] sourceNodeIds;
     private int[] targetNodeIds;
-
-    public int getNumberOfNodes() {
-        return numberOfNodes;
-    }
-
-    public int getNumberOfEdges() {
-        return numberOfEdges;
-    }
-
-    public double[][] getNodes() {
-        return nodes;
-    }
-
-    public int[] getSourceNodeIds() {
-        return sourceNodeIds;
-    }
-
-    public int[] getTargetNodeIds() {
-        return targetNodeIds;
-    }
-
-    public int[] getSourceToTargetCosts() {
-        return sourceToTargetCosts;
-    }
-
     private int[] sourceToTargetCosts;
 
     public DataSet() {
