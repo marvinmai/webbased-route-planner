@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class DataSetReader {
 
-    public static DataSet readDataSet(String filePath) {
+    public DataSet readDataSet(String filePath) {
         BufferedReader reader;
         DataSet dataSet = new DataSet();
         try {
