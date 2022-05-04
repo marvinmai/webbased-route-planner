@@ -1,5 +1,7 @@
 package de.unistuttgart;
 
+import java.util.List;
+
 public class NearestNodeSelector {
 
     private DataSet dataSet;
@@ -8,27 +10,23 @@ public class NearestNodeSelector {
         this.dataSet = dataSet;
     }
 
-    public int getForCoordinates(double lat1, double long1) {
-
+    public Node getForCoordinates(double clickLatitude, double clickLongitude) {
         double shortestDistance = Double.POSITIVE_INFINITY;
         double distance;
-        int nearestNodeNumber = 0;
+        Node nearestNode = null;
 
-        double currentLong;
-        double currentLat;
+        List<Node> filteredNodes = dataSet.getNodesInSquareAround(clickLatitude, clickLongitude, 0.1);
 
-        for (int i = 0; i < dataSet.getNodes().length; i++) {
-            currentLat = dataSet.getNodes()[i][0];
-            currentLong = dataSet.getNodes()[i][1];
+        for (Node node: filteredNodes) {
 
-            distance = calcDistance(lat1, long1, currentLat, currentLong);
+            distance = calcDistance(clickLatitude, clickLongitude, node.getLatitude(), node.getLongitude());
+
             if (distance < shortestDistance) {
                 shortestDistance = distance;
-                nearestNodeNumber = i;
+                nearestNode = node;
             }
         }
-
-        return nearestNodeNumber;
+        return nearestNode;
     }
 
     private double calcDistance(double lat1, double long1, double lat2, double long2) {
