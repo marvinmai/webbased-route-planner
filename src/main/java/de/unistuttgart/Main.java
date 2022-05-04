@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         long start = System.nanoTime() / 1000000;
 
-        String filePath = "/home/marvin/Documents/Studium/SoSe22/Programmierprojekt/datasets/germany.fmi";
+        String filePath = "/home/marvin/Documents/Studium/SoSe22/Programmierprojekt/datasets/toy.fmi";
         DataSet dataSet = DataSetReader.readDataSet(filePath);
 
         long duration = System.nanoTime() / 1000000 - start;

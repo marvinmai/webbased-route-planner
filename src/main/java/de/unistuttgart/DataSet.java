@@ -35,6 +35,10 @@ public class DataSet {
         targetNodeIds[index] = targetNodeId;
         sourceToTargetCosts[index] = sourceToTargetCost;
     }
+
+    public double[][] getNodes() {
+        return nodes;
+    }
 }
 
 
