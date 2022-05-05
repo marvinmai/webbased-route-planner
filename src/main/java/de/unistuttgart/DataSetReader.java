@@ -29,7 +29,7 @@ public class DataSetReader {
             String[] lineElements;
             for (int i = 0; i < numberOfNodes; i++) {
                 lineElements = reader.readLine().split(" ");
-                dataSet.addNode(i, Double.parseDouble(lineElements[2]), Double.parseDouble(lineElements[3]));;
+                dataSet.addCoordinate(i, Double.parseDouble(lineElements[2]), Double.parseDouble(lineElements[3]));;
             }
 
             for (int i = 0; i < numberOfEdges; i++) {

@@ -52,8 +52,8 @@ public class NearestNodeSelector {
         double upperLat = latNode + squareSizeDegrees / 2;
 
         double[] currentNode;
-        for (int i = 0; i < dataSet.getNodes().length; i++) {
-            currentNode = dataSet.getNodes()[i];
+        for (int i = 0; i < dataSet.getCoordinates().length; i++) {
+            currentNode = dataSet.getCoordinates()[i];
             if (longitude(currentNode) > lowerLong && longitude(currentNode) < upperLong
                     && latitude(currentNode) > lowerLat && latitude(currentNode) < upperLat) {
                 filteredNodes.add(new Node(i, latitude(currentNode), longitude(currentNode)));
