@@ -1,5 +1,8 @@
 package de.unistuttgart;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DataSet {
     private int numberOfNodes;
     private int numberOfEdges;
@@ -25,15 +28,19 @@ public class DataSet {
         sourceToTargetCosts = new int[numberOfEdges];
     }
 
-    public void addNode(int index, double firstValue, double secondValue) {
-        nodes[index][0] = firstValue;
-        nodes[index][1] = secondValue;
+    public void addNode(int index, double latitude, double longitude) {
+        nodes[index][0] = latitude;
+        nodes[index][1] = longitude;
     }
 
     public void addEntry(int index, int sourceNodeId, int targetNodeId, int sourceToTargetCost) {
         sourceNodeIds[index] = sourceNodeId;
         targetNodeIds[index] = targetNodeId;
         sourceToTargetCosts[index] = sourceToTargetCost;
+    }
+
+    public double[][] getNodes() {
+        return nodes;
     }
 }
 
