@@ -14,7 +14,7 @@ public class AdjacencyArray {
     private int currentIndex;
 
     public AdjacencyArray(int numberOfNodes) {
-        this.data = new LinkedList<>[numberOfNodes];
+        this.data = new LinkedList[numberOfNodes];
         currentList = new LinkedList<>();
         currentIndex = 0;
         this.numberOfNodes = numberOfNodes;
