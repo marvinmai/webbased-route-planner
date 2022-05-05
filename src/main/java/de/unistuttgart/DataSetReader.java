@@ -7,9 +7,12 @@ import java.io.IOException;
 
 public class DataSetReader {
 
-    public static DataSet readDataSet(String filePath) {
+    private AdjacencyArray adjacencyArray;
+
+    private DataSet dataSet;
+
+    public DataSet readDataSet(String filePath) {
         BufferedReader reader;
-        DataSet dataSet = new DataSet();
         try {
             FileReader fileReader = new FileReader(filePath);
             reader = new BufferedReader(fileReader);
@@ -24,6 +27,8 @@ public class DataSetReader {
             int numberOfNodes = Integer.parseInt(reader.readLine());
             int numberOfEdges = Integer.parseInt(reader.readLine());
 
+            adjacencyArray = new AdjacencyArray(numberOfNodes);
+            dataSet = new DataSet();
             dataSet.init(numberOfNodes, numberOfEdges);
 
             String[] lineElements;
@@ -32,14 +37,23 @@ public class DataSetReader {
                 dataSet.addCoordinate(i, Double.parseDouble(lineElements[2]), Double.parseDouble(lineElements[3]));;
             }
 
+            int currentSourceNode;
+            int lastSourceNode = 0;
             for (int i = 0; i < numberOfEdges; i++) {
                 lineElements = reader.readLine().split(" ");
+                currentSourceNode = Integer.parseInt(lineElements[0]);
 
-                dataSet.addEntry( i,
-                        Integer.parseInt(lineElements[0]),
+                while (lastSourceNode != currentSourceNode) {
+                    adjacencyArray.next();
+                    lastSourceNode++;
+                }
+
+                adjacencyArray.addNode(
+                        currentSourceNode,
                         Integer.parseInt(lineElements[1]),
                         Integer.parseInt(lineElements[2]));
             }
+            adjacencyArray.next();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (NullPointerException e) {
@@ -48,4 +62,11 @@ public class DataSetReader {
         return dataSet;
     }
 
+    public AdjacencyArray getAdjacencyArray() {
+        return adjacencyArray;
+    }
+
+    public DataSet getDataSet() {
+        return dataSet;
+    }
 }

@@ -13,11 +13,13 @@ public class NearestNodeSelectorTest {
     private String toyPath = "/home/marvin/Documents/Studium/SoSe22/Programmierprojekt/datasets/toy.fmi";
     private String germanyPath = "/home/marvin/Documents/Studium/SoSe22/Programmierprojekt/datasets/germany.fmi";
 
+    private DataSetReader dataSetReader = new DataSetReader();
+
     @Test
     public void getForCoordinatesTest() {
         System.out.println("************************************************************");
         System.out.println("START TEST: NEAREST COORDINATES SELECTOR");
-        dataSet = DataSetReader.readDataSet(toyPath);
+        dataSet = dataSetReader.readDataSet(toyPath);
         NearestNodeSelector nearestNodeSelector = new NearestNodeSelector(dataSet);
 
         int nodeNumber = nearestNodeSelector.getForCoordinates(48.999592, 9.998788).getIndex();
@@ -46,7 +48,7 @@ public class NearestNodeSelectorTest {
         System.out.println("START TEST: NEAREST COORDINATES SELECTOR FOR GERMANY");
         System.out.println("reading data.....");
         timer.start();
-        dataSet = DataSetReader.readDataSet(germanyPath);
+        dataSet = dataSetReader.readDataSet(germanyPath);
         System.out.println("Data reading finished.");
         timer.stop();
 

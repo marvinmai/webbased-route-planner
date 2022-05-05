@@ -7,12 +7,12 @@ import java.io.IOException;
 
 public class Main {
 
-    private static DataSet dataSet;
+    private static DataSetReader dataSetReader = new DataSetReader();
     public static void main(String[] args) {
         long start = System.nanoTime() / 1000000;
 
-        String filePath = "/home/marvin/Documents/Studium/SoSe22/Programmierprojekt/datasets/toy.fmi";
-        DataSet dataSet = DataSetReader.readDataSet(filePath);
+        String filePath = "/home/marvin/Documents/Studium/SoSe22/Programmierprojekt/datasets/germany.fmi";
+        DataSet dataSet = dataSetReader.readDataSet(filePath);
 
         long duration = System.nanoTime() / 1000000 - start;
         System.out.println("Execution duration in ms: " + duration);
