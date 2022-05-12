@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AdjacencyArray {
 
-    private List<double[]>[] data;
+    private List<double[]>[] nodes;
 
     private List<double[]> currentList;
 
@@ -14,7 +14,7 @@ public class AdjacencyArray {
     private int currentIndex;
 
     public AdjacencyArray(int numberOfNodes) {
-        this.data = new LinkedList[numberOfNodes];
+        this.nodes = new LinkedList[numberOfNodes];
         currentList = new LinkedList<>();
         currentIndex = 0;
         this.numberOfNodes = numberOfNodes;
@@ -30,13 +30,17 @@ public class AdjacencyArray {
 
     public void next() {
         if (currentIndex < numberOfNodes) {
-            data[currentIndex] = currentList;
+            nodes[currentIndex] = currentList;
             currentIndex++;
             currentList = new LinkedList<>();
         }
     }
 
     public List<double[]> getAdjacentNodes(int nodeIndex) {
-        return data[nodeIndex];
+        return nodes[nodeIndex];
+    }
+
+    public int getNumberOfNodes() {
+        return numberOfNodes;
     }
 }
