@@ -10,8 +10,8 @@ public class NearestNodeSelectorTest {
 
     private DataSet dataSet;
 
-    private String toyPath = "/home/marvin/Documents/Studium/SoSe22/Programmierprojekt/datasets/toy.fmi";
-    private String germanyPath = "/home/marvin/Documents/Studium/SoSe22/Programmierprojekt/datasets/germany.fmi";
+    private String toyPath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/toy.fmi";
+    private String germanyPath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/germany.fmi";
 
     private DataSetReader dataSetReader = new DataSetReader();
 

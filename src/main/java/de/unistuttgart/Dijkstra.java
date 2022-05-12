@@ -13,8 +13,8 @@ public class Dijkstra {
     private IndexMinPQ<Double> pq;
 
     public Dijkstra(AdjacencyArray adjArray, int start) {
-        edgeTo = new double[adjArray.getNumberOfNodes() - 1][];
-        distTo = new double[adjArray.getNumberOfNodes() - 1];
+        edgeTo = new double[adjArray.getNumberOfNodes()][];
+        distTo = new double[adjArray.getNumberOfNodes()];
         pq = new IndexMinPQ<>(adjArray.getNumberOfNodes());
         for (int v = 0; v < adjArray.getNumberOfNodes(); v++) {
             distTo[v] = Double.POSITIVE_INFINITY;
@@ -34,19 +34,11 @@ public class Dijkstra {
             if (distTo[w] > distTo[v] + getCost(node)) {
                 distTo[w] = distTo[v] + getCost(node);
                 edgeTo[w] = node;
-            }
-        }
-    }
-
-    private void relax(double[] edge) {
-        int v = (int) getSrcNode(edge), w = (int) getTargetNode(edge);
-        if (distTo[w] > distTo[v] + getCost(edge)) {
-            distTo[w] = distTo[v] + getCost(edge);
-            edgeTo[w] = edge;
-            if (pq.contains(w)){
-                pq.decreaseKey(w, distTo[w]);
-            } else {
-                pq.insert(w, distTo[w]);
+                if (pq.contains(w)) {
+                    pq.changeKey(w, distTo[w]);
+                } else {
+                    pq.insert(w, distTo[w]);
+                }
             }
         }
     }
