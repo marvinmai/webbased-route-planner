@@ -29,6 +29,7 @@ public class Dijkstra {
 
     private void relax(AdjacencyArray adjArr, int v) {
         List<double[]> adjNodes = adjArr.getAdjacentNodes(v);
+        if (adjNodes == null) return;
         for (double[] node: adjNodes) {
             int w = (int) getTargetNode(node);
             if (distTo[w] > distTo[v] + getCost(node)) {
