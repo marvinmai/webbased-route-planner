@@ -16,6 +16,7 @@ public class DijkstraTest {
     private AdjacencyArray adjacencyArray;
 
     private String toyPath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/toy.fmi";
+    private String toyPath2 = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/toy-2.fmi";
     private String germanyPath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/germany.fmi";
 
     private DataSetReader dataSetReader = new DataSetReader();
@@ -39,6 +40,33 @@ public class DijkstraTest {
 
         int i = 0;
         for(double[] e: path) {
+            Assert.assertArrayEquals(expectedPath.get(i), e, 0.001);
+            i++;
+        }
+    }
+
+    @Test
+    public void testDijkstra2() {
+        System.out.println("************************************************************");
+        System.out.println("TESTING DIJKSTRA PATH ONE-TO-ONE");
+        dataSet = dataSetReader.readDataSet(toyPath2);
+        adjacencyArray= dataSetReader.getAdjacencyArray();
+
+
+        Dijkstra dijkstra = new Dijkstra(adjacencyArray, 0);
+        int targetNode = 5;
+        Iterable<double[]> path = dijkstra.pathTo(targetNode);
+        List<double[]> expectedPath = new ArrayList<>();
+        double node3 [] = {3.0, 5.0, 1.0};
+        expectedPath.add(node3);
+        double node1 [] = {4.0, 3.0, 1.0};
+        expectedPath.add(node1);
+        double node2 [] = {0.0, 4.0, 7.0};
+        expectedPath.add(node2);
+
+        int i = 0;
+        for(double[] e: path) {
+            System.out.println("src: " + e[0] + " target: " + e[1] + " costs: " + e[2]);
             Assert.assertArrayEquals(expectedPath.get(i), e, 0.001);
             i++;
         }
