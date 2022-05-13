@@ -18,6 +18,7 @@ public class DijkstraTest {
     private String toyPath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/toy.fmi";
     private String toyPath2 = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/toy-2.fmi";
     private String germanyPath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/germany.fmi";
+    private String mvPath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/MV.fmi";
 
     private DataSetReader dataSetReader = new DataSetReader();
 
@@ -69,6 +70,38 @@ public class DijkstraTest {
             System.out.println("src: " + e[0] + " target: " + e[1] + " costs: " + e[2]);
             Assert.assertArrayEquals(expectedPath.get(i), e, 0.001);
             i++;
+        }
+    }
+
+    @Test
+    public void testDijkstraMV() {
+        System.out.println("************************************************************");
+        System.out.println("TESTING DIJKSTRA PATH ONE-TO-ONE - MV");
+        dataSet = dataSetReader.readDataSet(mvPath);
+        adjacencyArray= dataSetReader.getAdjacencyArray();
+
+        Dijkstra dijkstra = new Dijkstra(adjacencyArray, 0);
+        int targetNode = 5;
+        Iterable<double[]> path = dijkstra.pathTo(targetNode);
+
+        for(double[] e: path) {
+            System.out.println("src: " + e[0] + " target: " + e[1] + " costs: " + e[2]);
+        }
+    }
+
+    @Test
+    public void testDijkstraGermany() {
+        System.out.println("************************************************************");
+        System.out.println("TESTING DIJKSTRA PATH ONE-TO-ONE - GERMANY");
+        dataSet = dataSetReader.readDataSet(germanyPath);
+        adjacencyArray= dataSetReader.getAdjacencyArray();
+
+        Dijkstra dijkstra = new Dijkstra(adjacencyArray, 0);
+        int targetNode = 5;
+        Iterable<double[]> path = dijkstra.pathTo(targetNode);
+
+        for(double[] e: path) {
+            System.out.println("src: " + e[0] + " target: " + e[1] + " costs: " + e[2]);
         }
     }
 }
