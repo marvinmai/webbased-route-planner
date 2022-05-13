@@ -15,10 +15,11 @@ public class DijkstraTest {
     private DataSet dataSet;
     private AdjacencyArray adjacencyArray;
 
-    private String toyPath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/toy.fmi";
-    private String toyPath2 = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/toy-2.fmi";
-    private String germanyPath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/germany.fmi";
-    private String mvPath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/MV.fmi";
+    private String basePath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/";
+    private String toyPath = basePath + "toy.fmi";
+    private String toyPath2 = basePath + "toy-2.fmi";
+    private String germanyPath = basePath + "germany.fmi";
+    private String mvPath = basePath + "MV.fmi";
 
     private DataSetReader dataSetReader = new DataSetReader();
 
