@@ -5,10 +5,10 @@ import java.util.List;
 
 public class NearestNodeSelector {
 
-    private DataSet dataSet;
+    private CoordinatesSet coordinatesSet;
 
-    public NearestNodeSelector(DataSet dataSet) {
-        this.dataSet = dataSet;
+    public NearestNodeSelector(CoordinatesSet coordinatesSet) {
+        this.coordinatesSet = coordinatesSet;
     }
 
     public Node getForCoordinates(double clickLatitude, double clickLongitude) {
@@ -52,8 +52,8 @@ public class NearestNodeSelector {
         double upperLat = latNode + squareSizeDegrees / 2;
 
         double[] currentNode;
-        for (int i = 0; i < dataSet.getCoordinates().length; i++) {
-            currentNode = dataSet.getCoordinates()[i];
+        for (int i = 0; i < coordinatesSet.getCoordinates().length; i++) {
+            currentNode = coordinatesSet.getCoordinates()[i];
             if (longitude(currentNode) > lowerLong && longitude(currentNode) < upperLong
                     && latitude(currentNode) > lowerLat && latitude(currentNode) < upperLat) {
                 filteredNodes.add(new Node(i, latitude(currentNode), longitude(currentNode)));

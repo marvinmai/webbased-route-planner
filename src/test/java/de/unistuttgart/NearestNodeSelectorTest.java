@@ -8,19 +8,20 @@ public class NearestNodeSelectorTest {
 
     private Timer timer = new Timer();
 
-    private DataSet dataSet;
+    private CoordinatesSet coordinatesSet;
 
     private String toyPath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/toy.fmi";
     private String germanyPath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/germany.fmi";
 
-    private DataSetReader dataSetReader = new DataSetReader();
+    private DataReader dataReader = new DataReader();
 
     @Test
     public void getForCoordinatesTest() {
         System.out.println("************************************************************");
         System.out.println("START TEST: NEAREST COORDINATES SELECTOR");
-        dataSet = dataSetReader.readDataSet(toyPath);
-        NearestNodeSelector nearestNodeSelector = new NearestNodeSelector(dataSet);
+        dataReader.readData(toyPath);
+        coordinatesSet = dataReader.getCoordinatesSet();
+        NearestNodeSelector nearestNodeSelector = new NearestNodeSelector(coordinatesSet);
 
         int nodeNumber = nearestNodeSelector.getForCoordinates(48.999592, 9.998788).getIndex();
         assertEquals(0, nodeNumber);
@@ -48,14 +49,15 @@ public class NearestNodeSelectorTest {
         System.out.println("START TEST: NEAREST COORDINATES SELECTOR FOR GERMANY");
         System.out.println("reading data.....");
         timer.start();
-        dataSet = dataSetReader.readDataSet(germanyPath);
+        dataReader.readData(germanyPath);
+        coordinatesSet = dataReader.getCoordinatesSet();
         System.out.println("Data reading finished.");
         timer.stop();
 
         // selected node: 1029 48.79474220000000173 8.96197910000000064
         System.out.println("calculating nearest node...");
         timer.start();
-        NearestNodeSelector nearestNodeSelector = new NearestNodeSelector(dataSet);
+        NearestNodeSelector nearestNodeSelector = new NearestNodeSelector(coordinatesSet);
         int nodeNumber = nearestNodeSelector.getForCoordinates(48.742015, 12.736967).getIndex();
         System.out.println("Calculation finished.");
         timer.stop();

@@ -6,13 +6,11 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class DijkstraTest {
 
     private Timer timer = new Timer();
 
-    private DataSet dataSet;
+    private CoordinatesSet coordinatesSet;
     private AdjacencyArray adjacencyArray;
 
     private String basePath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/";
@@ -21,14 +19,15 @@ public class DijkstraTest {
     private String germanyPath = basePath + "germany.fmi";
     private String mvPath = basePath + "MV.fmi";
 
-    private DataSetReader dataSetReader = new DataSetReader();
+    private DataReader dataReader = new DataReader();
 
     @Test
     public void testDijkstra() {
         System.out.println("************************************************************");
         System.out.println("TESTING DIJKSTRA PATH ONE-TO-ONE");
-        dataSet = dataSetReader.readDataSet(toyPath);
-        adjacencyArray= dataSetReader.getAdjacencyArray();
+        dataReader.readData(toyPath);
+        coordinatesSet = dataReader.getCoordinatesSet();
+        adjacencyArray= dataReader.getAdjacencyArray();
 
 
         Dijkstra dijkstra = new Dijkstra(adjacencyArray, 0);
@@ -51,8 +50,9 @@ public class DijkstraTest {
     public void testDijkstra2() {
         System.out.println("************************************************************");
         System.out.println("TESTING DIJKSTRA PATH ONE-TO-ONE");
-        dataSet = dataSetReader.readDataSet(toyPath2);
-        adjacencyArray= dataSetReader.getAdjacencyArray();
+        dataReader.readData(toyPath2);
+        coordinatesSet = dataReader.getCoordinatesSet();
+        adjacencyArray= dataReader.getAdjacencyArray();
 
 
         Dijkstra dijkstra = new Dijkstra(adjacencyArray, 0);
@@ -80,11 +80,12 @@ public class DijkstraTest {
         System.out.println("TESTING DIJKSTRA PATH ONE-TO-ONE - MV");
         System.out.println("reading data.....");
         timer.start();
-        dataSet = dataSetReader.readDataSet(mvPath);
+        dataReader.readData(mvPath);
+        coordinatesSet = dataReader.getCoordinatesSet();
         System.out.println("Data reading finished.");
         timer.stop();
         timer.start();
-        adjacencyArray= dataSetReader.getAdjacencyArray();
+        adjacencyArray= dataReader.getAdjacencyArray();
 
         System.out.println("calculating route.....");
         Dijkstra dijkstra = new Dijkstra(adjacencyArray, 0);
@@ -105,11 +106,12 @@ public class DijkstraTest {
         System.out.println("TESTING DIJKSTRA PATH ONE-TO-ONE - GERMANY");
         System.out.println("reading data.....");
         timer.start();
-        dataSet = dataSetReader.readDataSet(germanyPath);
+        dataReader.readData(germanyPath);
+        coordinatesSet = dataReader.getCoordinatesSet();
         System.out.println("Data reading finished.");
         timer.stop();
         timer.start();
-        adjacencyArray= dataSetReader.getAdjacencyArray();
+        adjacencyArray= dataReader.getAdjacencyArray();
 
         System.out.println("calculating route.....");
         Dijkstra dijkstra = new Dijkstra(adjacencyArray, 0);

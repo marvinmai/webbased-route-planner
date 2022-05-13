@@ -5,13 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class DataSetReader {
+public class DataReader {
 
     private AdjacencyArray adjacencyArray;
 
-    private DataSet dataSet;
+    private CoordinatesSet coordinatesSet;
 
-    public DataSet readDataSet(String filePath) {
+    public void readData(String filePath) {
         BufferedReader reader;
         try {
             FileReader fileReader = new FileReader(filePath);
@@ -28,13 +28,12 @@ public class DataSetReader {
             int numberOfEdges = Integer.parseInt(reader.readLine());
 
             adjacencyArray = new AdjacencyArray(numberOfNodes);
-            dataSet = new DataSet();
-            dataSet.init(numberOfNodes, numberOfEdges);
+            coordinatesSet = new CoordinatesSet(numberOfNodes, numberOfEdges);
 
             String[] lineElements;
             for (int i = 0; i < numberOfNodes; i++) {
                 lineElements = reader.readLine().split(" ");
-                dataSet.addCoordinate(i, Double.parseDouble(lineElements[2]), Double.parseDouble(lineElements[3]));;
+                coordinatesSet.addCoordinate(i, Double.parseDouble(lineElements[2]), Double.parseDouble(lineElements[3]));;
             }
 
             int currentSourceNode;
@@ -59,14 +58,13 @@ public class DataSetReader {
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-        return dataSet;
     }
 
     public AdjacencyArray getAdjacencyArray() {
         return adjacencyArray;
     }
 
-    public DataSet getDataSet() {
-        return dataSet;
+    public CoordinatesSet getCoordinatesSet() {
+        return coordinatesSet;
     }
 }
