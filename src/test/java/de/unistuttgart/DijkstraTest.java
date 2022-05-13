@@ -77,10 +77,19 @@ public class DijkstraTest {
     public void testDijkstraMV() {
         System.out.println("************************************************************");
         System.out.println("TESTING DIJKSTRA PATH ONE-TO-ONE - MV");
+        System.out.println("reading data.....");
+        timer.start();
         dataSet = dataSetReader.readDataSet(mvPath);
+        System.out.println("Data reading finished.");
+        timer.stop();
+        timer.start();
         adjacencyArray= dataSetReader.getAdjacencyArray();
 
+        System.out.println("calculating route.....");
         Dijkstra dijkstra = new Dijkstra(adjacencyArray, 0);
+        System.out.println("route calculation finished.....");
+        timer.stop();
+
         int targetNode = 5;
         Iterable<double[]> path = dijkstra.pathTo(targetNode);
 
@@ -93,12 +102,20 @@ public class DijkstraTest {
     public void testDijkstraGermany() {
         System.out.println("************************************************************");
         System.out.println("TESTING DIJKSTRA PATH ONE-TO-ONE - GERMANY");
+        System.out.println("reading data.....");
+        timer.start();
         dataSet = dataSetReader.readDataSet(germanyPath);
+        System.out.println("Data reading finished.");
+        timer.stop();
+        timer.start();
         adjacencyArray= dataSetReader.getAdjacencyArray();
 
+        System.out.println("calculating route.....");
         Dijkstra dijkstra = new Dijkstra(adjacencyArray, 0);
         int targetNode = 5;
         Iterable<double[]> path = dijkstra.pathTo(targetNode);
+        System.out.println("route calculation finished.....");
+        timer.stop();
 
         for(double[] e: path) {
             System.out.println("src: " + e[0] + " target: " + e[1] + " costs: " + e[2]);
