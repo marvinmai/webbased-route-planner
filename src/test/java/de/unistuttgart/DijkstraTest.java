@@ -1,5 +1,6 @@
 package de.unistuttgart;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -33,11 +34,12 @@ public class DijkstraTest {
         List<double[]> expectedPath = new ArrayList<>();
         double node1 [] = {4.0, 3.0, 1.0};
         expectedPath.add(node1);
-        double node2 [] = {4.0, 3.0, 1.0};
+        double node2 [] = {0.0, 4.0, 7.0};
         expectedPath.add(node2);
+
         int i = 0;
-        while(path.iterator().hasNext()) {
-            assertEquals( (int) expectedPath.get(i)[0], (int) path.iterator().next()[0]);
+        for(double[] e: path) {
+            Assert.assertArrayEquals(expectedPath.get(i), e, 0.001);
             i++;
         }
     }
