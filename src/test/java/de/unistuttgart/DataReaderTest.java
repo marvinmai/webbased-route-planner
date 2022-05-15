@@ -1,6 +1,10 @@
 package de.unistuttgart;
 
-public class Main {
+import org.junit.Test;
+
+public class DataReaderTest {
+
+    private static DataReader dataReader = new DataReader();
 
     private String basePath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/";
     private String toyPath = basePath + "toy.fmi";
@@ -8,14 +12,18 @@ public class Main {
     private String germanyPath = basePath + "germany.fmi";
     private String mvPath = basePath + "MV.fmi";
 
-    private DataReader dataReader = new DataReader();
-    public void main(String[] args) {
-        long start = System.nanoTime() / 1000000;
+    private Timer timer = new Timer();
+
+    @Test
+    public void testDataReader() {
+        System.out.println("************************************************************");
+        System.out.println("TESTING DIJKSTRA PATH ONE-TO-ONE");
+        timer.start();
 
         dataReader.readData(toyPath);
         CoordinatesSet coordinatesSet = dataReader.getCoordinatesSet();
 
-        long duration = System.nanoTime() / 1000000 - start;
-        System.out.println("Execution duration in ms: " + duration);
+        timer.stop();
     }
+
 }

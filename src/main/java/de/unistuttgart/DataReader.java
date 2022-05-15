@@ -27,37 +27,50 @@ public class DataReader {
             int numberOfNodes = Integer.parseInt(reader.readLine());
             int numberOfEdges = Integer.parseInt(reader.readLine());
 
-            adjacencyArray = new AdjacencyArray(numberOfNodes);
-            coordinatesSet = new CoordinatesSet(numberOfNodes, numberOfEdges);
+            coordinatesSet = parseCoordinates(reader, numberOfNodes, numberOfEdges);
+            adjacencyArray = parseAdjacencyArray(reader, numberOfNodes, numberOfEdges);
 
-            String[] lineElements;
-            for (int i = 0; i < numberOfNodes; i++) {
-                lineElements = reader.readLine().split(" ");
-                coordinatesSet.addCoordinate(i, Double.parseDouble(lineElements[2]), Double.parseDouble(lineElements[3]));;
-            }
-
-            int currentSourceNode;
-            int lastSourceNode = 0;
-            for (int i = 0; i < numberOfEdges; i++) {
-                lineElements = reader.readLine().split(" ");
-                currentSourceNode = Integer.parseInt(lineElements[0]);
-
-                while (lastSourceNode != currentSourceNode) {
-                    adjacencyArray.next();
-                    lastSourceNode++;
-                }
-
-                adjacencyArray.addNode(
-                        currentSourceNode,
-                        Integer.parseInt(lineElements[1]),
-                        Integer.parseInt(lineElements[2]));
-            }
-            adjacencyArray.next();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
+    }
+
+    private CoordinatesSet parseCoordinates(BufferedReader reader, int numberOfNodes, int numberOfEdges) throws IOException {
+        CoordinatesSet coordinates = new CoordinatesSet(numberOfNodes, numberOfEdges);
+
+        String[] lineElements;
+        for (int i = 0; i < numberOfNodes; i++) {
+            lineElements = reader.readLine().split(" ");
+            coordinates.addCoordinate(i, Double.parseDouble(lineElements[2]), Double.parseDouble(lineElements[3]));;
+        }
+        return coordinates;
+    }
+
+    private AdjacencyArray parseAdjacencyArray(BufferedReader reader, int numberOfNodes, int numberOfEdges) throws IOException {
+        AdjacencyArray adjArray = new AdjacencyArray(numberOfNodes);
+
+        String[] lineElements;
+        int currentSourceNode;
+        int lastSourceNode = 0;
+        for (int i = 0; i < numberOfEdges; i++) {
+            lineElements = reader.readLine().split(" ");
+            currentSourceNode = Integer.parseInt(lineElements[0]);
+
+            while (lastSourceNode != currentSourceNode) {
+                adjArray.next();
+                lastSourceNode++;
+            }
+
+            adjArray.addNode(
+                    currentSourceNode,
+                    Integer.parseInt(lineElements[1]),
+                    Integer.parseInt(lineElements[2]));
+        }
+        adjArray.next();
+
+        return adjArray;
     }
 
     public AdjacencyArray getAdjacencyArray() {
