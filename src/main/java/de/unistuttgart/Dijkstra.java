@@ -1,5 +1,6 @@
 package de.unistuttgart;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -28,13 +29,15 @@ public class Dijkstra {
     }
 
     private void relax(AdjacencyArray adjArr, int v) {
-        List<double[]> adjNodes = adjArr.getAdjacentNodes(v);
+        List<int[]> adjNodes = adjArr.getAdjacentNodes(v);
         if (adjNodes == null) return;
-        for (double[] node: adjNodes) {
+        double doubleNode[];
+        for (int[] node: adjNodes) {
             int w = (int) getTargetNode(node);
             if (distTo[w] > distTo[v] + getCost(node)) {
                 distTo[w] = distTo[v] + getCost(node);
-                edgeTo[w] = node;
+                doubleNode = new double[]{node[0], node[1], node[2]};
+                edgeTo[w] = doubleNode;
                 if (pq.contains(w)) {
                     pq.changeKey(w, distTo[w]);
                 } else {
@@ -44,15 +47,19 @@ public class Dijkstra {
         }
     }
 
+    private double getSrcNode(int[] edge) {
+        return edge[0];
+    }
+
     private double getSrcNode(double[] edge) {
         return edge[0];
     }
 
-    private double getTargetNode(double[] edge) {
+    private double getTargetNode(int[] edge) {
         return edge[1];
     }
 
-    private double getCost(double[] edge) {
+    private double getCost(int[] edge) {
         return edge[2];
     }
     public boolean hasPathTo(int v){
