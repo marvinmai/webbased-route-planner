@@ -9,6 +9,7 @@ import java.util.List;
 public class DijkstraTest {
 
     private Timer timer = new Timer();
+    private MemoryMeasure memoryMeasure = new MemoryMeasure();
 
     private CoordinatesSet coordinatesSet;
     private AdjacencyArray adjacencyArray;
@@ -50,6 +51,7 @@ public class DijkstraTest {
     public void testDijkstra2() {
         System.out.println("************************************************************");
         System.out.println("TESTING DIJKSTRA PATH ONE-TO-ONE");
+        memoryMeasure.start();
         dataReader.readData(toyPath2);
         coordinatesSet = dataReader.getCoordinatesSet();
         adjacencyArray= dataReader.getAdjacencyArray();
@@ -66,6 +68,7 @@ public class DijkstraTest {
         double node2 [] = {0.0, 4.0, 7.0};
         expectedPath.add(node2);
 
+        memoryMeasure.stop();
         int i = 0;
         for(double[] e: path) {
             System.out.println("src: " + e[0] + " target: " + e[1] + " costs: " + e[2]);
@@ -78,6 +81,9 @@ public class DijkstraTest {
     public void testDijkstraMV() {
         System.out.println("************************************************************");
         System.out.println("TESTING DIJKSTRA PATH ONE-TO-ONE - MV");
+
+        memoryMeasure.start();
+
         System.out.println("reading data.....");
         timer.start();
         dataReader.readData(mvPath);
@@ -95,6 +101,8 @@ public class DijkstraTest {
         int targetNode = 5;
         Iterable<double[]> path = dijkstra.pathTo(targetNode);
 
+        memoryMeasure.stop();
+
         for(double[] e: path) {
             System.out.println("src: " + e[0] + " target: " + e[1] + " costs: " + e[2]);
         }
@@ -104,6 +112,7 @@ public class DijkstraTest {
     public void testDijkstraGermany() {
         System.out.println("************************************************************");
         System.out.println("TESTING DIJKSTRA PATH ONE-TO-ONE - GERMANY");
+        memoryMeasure.start();
         System.out.println("reading data.....");
         timer.start();
         dataReader.readData(germanyPath);
@@ -119,6 +128,7 @@ public class DijkstraTest {
         Iterable<double[]> path = dijkstra.pathTo(targetNode);
         System.out.println("route calculation finished.....");
         timer.stop();
+        memoryMeasure.stop();
 
         for(double[] e: path) {
             System.out.println("src: " + e[0] + " target: " + e[1] + " costs: " + e[2]);

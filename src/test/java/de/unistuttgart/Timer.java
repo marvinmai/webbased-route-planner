@@ -11,6 +11,6 @@ public class Timer {
 
     public void stop() {
         stopTime = System.nanoTime() / 1000000;
-        System.out.println("Execution duration in ms: " + (stopTime - startTime));
+        System.out.println("Execution duration: " + (stopTime - startTime) + "ms");
     }
 }
