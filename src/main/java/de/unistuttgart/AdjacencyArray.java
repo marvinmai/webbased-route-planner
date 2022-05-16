@@ -5,9 +5,9 @@ import java.util.List;
 
 public class AdjacencyArray {
 
-    private List<double[]>[] nodes;
+    private List<int[]>[] nodes;
 
-    private List<double[]> currentList;
+    private List<int[]> currentList;
 
     private int numberOfNodes;
 
@@ -20,8 +20,8 @@ public class AdjacencyArray {
         this.numberOfNodes = numberOfNodes;
     }
 
-    public void addNode(double srcNode, double targetNode, double cost) {
-        double[] node = new double[3];
+    public void addNode(int srcNode, int targetNode, int cost) {
+        int[] node = new int[3];
         node[0] = srcNode;
         node[1] = targetNode;
         node[2] = cost;
@@ -36,7 +36,7 @@ public class AdjacencyArray {
         }
     }
 
-    public List<double[]> getAdjacentNodes(int nodeIndex) {
+    public List<int[]> getAdjacentNodes(int nodeIndex) {
         return nodes[nodeIndex];
     }
 
