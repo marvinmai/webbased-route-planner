@@ -7,19 +7,25 @@ import java.lang.*;
 
 public class DijkstraOneToAll {
 
+    private AdjacencyArray adjacencyArray;
+
+    public DijkstraOneToAll(AdjacencyArray adjacencyArray) {
+        this.adjacencyArray = adjacencyArray;
+    }
+
     // Function that implements Dijkstra's single source shortest path
     // algorithm for a graph represented using adjacency matrix
     // representation
-    public int[] dijkstra(AdjacencyArray adjacencyArray, int src) {
+    public int[] getDistancesFromSrcToAll(int src) {
 
         int numberOfNodes = adjacencyArray.getNumberOfNodes();
 
         // The output array. dist[i] will hold the shortest distance from src to node with index i
-        int dist[] = new int[numberOfNodes];
+        int[] dist = new int[numberOfNodes];
 
         // sptSet[i] will true if vertex i is included in shortest
         // path tree or shortest distance from src to i is finalized
-        Boolean sptSet[] = new Boolean[numberOfNodes];
+        Boolean[] sptSet = new Boolean[numberOfNodes];
 
         // Initialize all distances as INFINITE and stpSet[] as false
         for (int i = 0; i < numberOfNodes; i++) {
@@ -30,30 +36,32 @@ public class DijkstraOneToAll {
         // Distance of source vertex from itself is always 0
         dist[src] = 0;
         int costsFromUtoV = 0;
+        List<int[]> adjacencyNodes;
+        int u;
 
         // Find shortest path for all vertices
         for (int count = 0; count < numberOfNodes - 1; count++) {
             // Pick the minimum distance vertex from the set of vertices
             // not yet processed. u is always equal to src in first
             // iteration.
-            int u = minDistance(dist, sptSet, numberOfNodes);
+            // TODO replace dist[] with min priority queue
+            u = minDistance(dist, sptSet, numberOfNodes);
 
             // Mark the picked vertex as processed
             sptSet[u] = true;
+            adjacencyNodes = adjacencyArray.getAdjacentNodes(u);
 
             // Update dist value of the adjacent vertices of the
             // picked vertex.
-            for (int v = 0; v < numberOfNodes; v++) {
-                // Update dist[v] only if is not in sptSet, there is an
-                // edge from u to v, and total weight of path from src to
-                // v through u is smaller than current value of dist[v]
-                costsFromUtoV = getCostsForAtoB(u, v, adjacencyArray);
-                if (!sptSet[v]
+            for (int[] adjacencyNode: adjacencyNodes) {
+                costsFromUtoV = adjacencyNode[2];
+
+                if (!sptSet[adjacencyNode[1]]
                         && costsFromUtoV != 0
                         && dist[u] != Integer.MAX_VALUE
-                        && dist[u] + costsFromUtoV < dist[v])
-                {
-                    dist[v] = dist[u] + costsFromUtoV;
+                        && dist[u] + costsFromUtoV < dist[adjacencyNode[1]]) {
+
+                    dist[adjacencyNode[1]] = dist[u] + costsFromUtoV;
                 }
             }
         }
@@ -73,11 +81,12 @@ public class DijkstraOneToAll {
 
     // A utility function to find the vertex with minimum distance value,
     // from the set of vertices not yet included in shortest path tree
-    private int minDistance(int dist[], Boolean sptSet[], int numberOfNodes) {
-        int min = Integer.MAX_VALUE, min_index = -1;
+    private int minDistance(int[] dist, Boolean[] sptSet, int numberOfNodes) {
+        int min = Integer.MAX_VALUE;
+        int min_index = -1;
 
         for (int v = 0; v < numberOfNodes; v++)
-            if (sptSet[v] == false && dist[v] <= min) {
+            if (!sptSet[v] && dist[v] <= min) {
                 min = dist[v];
                 min_index = v;
             }
