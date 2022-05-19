@@ -22,14 +22,56 @@ public class DijkstraOneToAllTest {
     public void testToy() {
 
         System.out.println("************************************************************");
-        System.out.println("TESTING DIJKSTRA PATH ONE-TO-ONE");
+        System.out.println("TESTING DIJKSTRA PATH ONE-TO-ALL");
         dataReader.readData(toyPath);
         coordinatesSet = dataReader.getCoordinatesSet();
         adjacencyArray= dataReader.getAdjacencyArray();
 
-        DijkstraOneToAll dijkstra = new DijkstraOneToAll();
+        DijkstraOneToAll dijkstra = new DijkstraOneToAll(adjacencyArray);
 
-        dijkstra.dijkstra(adjacencyArray, 0);
+        int[] result = dijkstra.getDistancesFromSrcToAll(0);
+
+        printSolution(result);
+    }
+
+    @Test
+    public void testGermany() {
+        System.out.println("************************************************************");
+        System.out.println("TESTING DIJKSTRA PATH ONE-TO-ALL");
+        dataReader.readData(germanyPath);
+        coordinatesSet = dataReader.getCoordinatesSet();
+        adjacencyArray= dataReader.getAdjacencyArray();
+
+        DijkstraOneToAll dijkstra = new DijkstraOneToAll(adjacencyArray);
+        timer.start();
+        System.out.println("calculating all distances...");
+        dijkstra.getDistancesFromSrcToAll(0);
+        System.out.println("calculation finished.");
+        timer.stop();
+    }
+
+    @Test
+    public void testMV() {
+        System.out.println("************************************************************");
+        System.out.println("TESTING DIJKSTRA PATH ONE-TO-ALL");
+        dataReader.readData(mvPath);
+        coordinatesSet = dataReader.getCoordinatesSet();
+        adjacencyArray= dataReader.getAdjacencyArray();
+
+        DijkstraOneToAll dijkstra = new DijkstraOneToAll(adjacencyArray);
+        timer.start();
+        System.out.println("calculating all distances...");
+        int[] result = dijkstra.getDistancesFromSrcToAll(0);
+        System.out.println("calculation finished.");
+        timer.stop();
+        printSolution(result);
+    }
+
+    void printSolution(int dist[])
+    {
+        System.out.println("Vertex \t\t Distance from Source");
+        for (int i = 0; i < dist.length; i++)
+            System.out.println(i + " \t\t " + dist[i]);
     }
 
 }
