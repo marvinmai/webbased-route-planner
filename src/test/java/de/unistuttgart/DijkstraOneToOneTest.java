@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DijkstraTest {
+public class DijkstraOneToOneTest {
 
     private Timer timer = new Timer();
     private MemoryMeasure memoryMeasure = new MemoryMeasure();
@@ -31,7 +31,7 @@ public class DijkstraTest {
         adjacencyArray= dataReader.getAdjacencyArray();
 
 
-        Dijkstra dijkstra = new Dijkstra(adjacencyArray, 0);
+        DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, 0);
         int targetNode = 3;
         Iterable<double[]> path = dijkstra.pathTo(targetNode);
         List<double[]> expectedPath = new ArrayList<>();
@@ -57,7 +57,7 @@ public class DijkstraTest {
         adjacencyArray= dataReader.getAdjacencyArray();
 
 
-        Dijkstra dijkstra = new Dijkstra(adjacencyArray, 0);
+        DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, 0);
         int targetNode = 5;
         Iterable<double[]> path = dijkstra.pathTo(targetNode);
         List<double[]> expectedPath = new ArrayList<>();
@@ -94,7 +94,7 @@ public class DijkstraTest {
         adjacencyArray= dataReader.getAdjacencyArray();
 
         System.out.println("calculating route.....");
-        Dijkstra dijkstra = new Dijkstra(adjacencyArray, 0);
+        DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, 0);
         System.out.println("route calculation finished.....");
         timer.stop();
 
@@ -123,7 +123,7 @@ public class DijkstraTest {
         adjacencyArray= dataReader.getAdjacencyArray();
 
         System.out.println("calculating route.....");
-        Dijkstra dijkstra = new Dijkstra(adjacencyArray, 0);
+        DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, 0);
         int targetNode = 5;
         Iterable<double[]> path = dijkstra.pathTo(targetNode);
         System.out.println("route calculation finished.....");

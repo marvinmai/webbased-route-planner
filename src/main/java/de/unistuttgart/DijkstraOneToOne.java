@@ -1,10 +1,9 @@
 package de.unistuttgart;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-public class Dijkstra {
+public class DijkstraOneToOne {
 
     // edgeTo[v] = last edge on shortest s->v path
     private double[][] edgeTo;
@@ -13,7 +12,7 @@ public class Dijkstra {
     // priority queue of vertices
     private IndexMinPQ<Double> pq;
 
-    public Dijkstra(AdjacencyArray adjArray, int start) {
+    public DijkstraOneToOne(AdjacencyArray adjArray, int start) {
         edgeTo = new double[adjArray.getNumberOfNodes()][];
         distTo = new double[adjArray.getNumberOfNodes()];
         pq = new IndexMinPQ<>(adjArray.getNumberOfNodes());
