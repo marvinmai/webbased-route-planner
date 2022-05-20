@@ -10,7 +10,7 @@ public class DijkstraOneToAllTest {
     private CoordinatesSet coordinatesSet;
     private AdjacencyArray adjacencyArray;
 
-    private String basePath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/";
+    private String basePath = "/Users/aminheidari/Documents/Uni/Programmierprojekt/Phase I/";
     private String toyPath = basePath + "toy.fmi";
     private String toyPath2 = basePath + "toy-2.fmi";
     private String germanyPath = basePath + "germany.fmi";
@@ -27,11 +27,15 @@ public class DijkstraOneToAllTest {
         coordinatesSet = dataReader.getCoordinatesSet();
         adjacencyArray= dataReader.getAdjacencyArray();
 
-        DijkstraOneToAll dijkstra = new DijkstraOneToAll(adjacencyArray);
+        //DijkstraOneToAll dijkstra = new DijkstraOneToAll(adjacencyArray);
 
-        int[] result = dijkstra.getDistancesFromSrcToAll(0);
+        //int[] result = dijkstra.getDistancesFromSrcToAll(0);
 
-        printSolution(result);
+        WorkingOneToAllDijkstra workingOneToAllDijkstra = new WorkingOneToAllDijkstra();
+        workingOneToAllDijkstra.dijktstra(adjacencyArray,2);
+        for(int i : workingOneToAllDijkstra.getDist()) {
+            System.out.println(i);
+        }
     }
 
     @Test
@@ -42,10 +46,10 @@ public class DijkstraOneToAllTest {
         coordinatesSet = dataReader.getCoordinatesSet();
         adjacencyArray= dataReader.getAdjacencyArray();
 
-        DijkstraOneToAll dijkstra = new DijkstraOneToAll(adjacencyArray);
+        WorkingOneToAllDijkstra workingOneToAllDijkstra = new WorkingOneToAllDijkstra();
         timer.start();
         System.out.println("calculating all distances...");
-        dijkstra.getDistancesFromSrcToAll(0);
+        workingOneToAllDijkstra.dijktstra(adjacencyArray, 0);
         System.out.println("calculation finished.");
         timer.stop();
     }
@@ -57,14 +61,17 @@ public class DijkstraOneToAllTest {
         dataReader.readData(mvPath);
         coordinatesSet = dataReader.getCoordinatesSet();
         adjacencyArray= dataReader.getAdjacencyArray();
-
-        DijkstraOneToAll dijkstra = new DijkstraOneToAll(adjacencyArray);
+        WorkingOneToAllDijkstra workingOneToAllDijkstra = new WorkingOneToAllDijkstra();
+        //DijkstraOneToAll dijkstra = new DijkstraOneToAll(adjacencyArray);
         timer.start();
+
+        workingOneToAllDijkstra.dijktstra(adjacencyArray,1);
         System.out.println("calculating all distances...");
-        int[] result = dijkstra.getDistancesFromSrcToAll(0);
-        System.out.println("calculation finished.");
         timer.stop();
-        printSolution(result);
+        System.out.println("calculation finished.");
+        int counter = 0;
+
+
     }
 
     void printSolution(int dist[])
