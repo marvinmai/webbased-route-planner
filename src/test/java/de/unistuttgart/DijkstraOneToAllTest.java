@@ -27,10 +27,6 @@ public class DijkstraOneToAllTest {
         coordinatesSet = dataReader.getCoordinatesSet();
         adjacencyArray= dataReader.getAdjacencyArray();
 
-        //DijkstraOneToAll dijkstra = new DijkstraOneToAll(adjacencyArray);
-
-        //int[] result = dijkstra.getDistancesFromSrcToAll(0);
-
         DijkstraOneToAll dijkstraOneToAll = new DijkstraOneToAll();
         int[] distances = dijkstraOneToAll.calculateDistances(adjacencyArray,2);
         for(int i : distances) {
@@ -62,23 +58,11 @@ public class DijkstraOneToAllTest {
         coordinatesSet = dataReader.getCoordinatesSet();
         adjacencyArray= dataReader.getAdjacencyArray();
         DijkstraOneToAll dijkstraOneToAll = new DijkstraOneToAll();
-        //DijkstraOneToAll dijkstra = new DijkstraOneToAll(adjacencyArray);
         timer.start();
 
         dijkstraOneToAll.calculateDistances(adjacencyArray,1);
         System.out.println("calculating all distances...");
         timer.stop();
         System.out.println("calculation finished.");
-        int counter = 0;
-
-
     }
-
-    void printSolution(int dist[])
-    {
-        System.out.println("Vertex \t\t Distance from Source");
-        for (int i = 0; i < dist.length; i++)
-            System.out.println(i + " \t\t " + dist[i]);
-    }
-
 }

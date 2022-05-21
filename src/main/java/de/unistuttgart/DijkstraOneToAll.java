@@ -8,7 +8,7 @@ public class DijkstraOneToAll {
     private Set<Integer> settled = new HashSet<>();
     private int numberOfNodes;
 
-    private PriorityQueue<NodeForOneToAll> priorityQueue;
+    private PriorityQueue<Node> priorityQueue;
     private AdjacencyArray adjacencyArray;
 
     public DijkstraOneToAll() {
@@ -23,7 +23,7 @@ public class DijkstraOneToAll {
         for (int i = 0; i < numberOfNodes; i++) {
             dist[i] = Integer.MAX_VALUE;
         }
-        priorityQueue.add(new NodeForOneToAll(src, 0));
+        priorityQueue.add(new Node(src, 0));
         dist[src] = 0;
         while (settled.size() != numberOfNodes) {
             if (priorityQueue.isEmpty()) {
@@ -53,7 +53,7 @@ public class DijkstraOneToAll {
                 if (newDistance < dist[adjacentNodeID]) {
                     dist[adjacentNodeID] = newDistance;
                 }
-                priorityQueue.add(new NodeForOneToAll(adjacentNodeID, adjacentNodeCost));
+                priorityQueue.add(new Node(adjacentNodeID, adjacentNodeCost));
             }
         }
     }
