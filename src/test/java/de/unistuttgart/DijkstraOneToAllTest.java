@@ -31,9 +31,9 @@ public class DijkstraOneToAllTest {
 
         //int[] result = dijkstra.getDistancesFromSrcToAll(0);
 
-        WorkingOneToAllDijkstra workingOneToAllDijkstra = new WorkingOneToAllDijkstra();
-        workingOneToAllDijkstra.dijktstra(adjacencyArray,2);
-        for(int i : workingOneToAllDijkstra.getDist()) {
+        DijkstraOneToAll dijkstraOneToAll = new DijkstraOneToAll();
+        int[] distances = dijkstraOneToAll.calculateDistances(adjacencyArray,2);
+        for(int i : distances) {
             System.out.println(i);
         }
     }
@@ -46,10 +46,10 @@ public class DijkstraOneToAllTest {
         coordinatesSet = dataReader.getCoordinatesSet();
         adjacencyArray= dataReader.getAdjacencyArray();
 
-        WorkingOneToAllDijkstra workingOneToAllDijkstra = new WorkingOneToAllDijkstra();
+        DijkstraOneToAll dijkstraOneToAll = new DijkstraOneToAll();
         timer.start();
         System.out.println("calculating all distances...");
-        workingOneToAllDijkstra.dijktstra(adjacencyArray, 0);
+        dijkstraOneToAll.calculateDistances(adjacencyArray, 0);
         System.out.println("calculation finished.");
         timer.stop();
     }
@@ -61,11 +61,11 @@ public class DijkstraOneToAllTest {
         dataReader.readData(mvPath);
         coordinatesSet = dataReader.getCoordinatesSet();
         adjacencyArray= dataReader.getAdjacencyArray();
-        WorkingOneToAllDijkstra workingOneToAllDijkstra = new WorkingOneToAllDijkstra();
+        DijkstraOneToAll dijkstraOneToAll = new DijkstraOneToAll();
         //DijkstraOneToAll dijkstra = new DijkstraOneToAll(adjacencyArray);
         timer.start();
 
-        workingOneToAllDijkstra.dijktstra(adjacencyArray,1);
+        dijkstraOneToAll.calculateDistances(adjacencyArray,1);
         System.out.println("calculating all distances...");
         timer.stop();
         System.out.println("calculation finished.");

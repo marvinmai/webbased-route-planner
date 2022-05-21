@@ -46,6 +46,17 @@ public class DijkstraOneToOne {
         }
     }
 
+    public Iterable<double[]> pathTo(int v){
+        if(!hasPathTo(v)){
+            return null;
+        }
+        Stack<double[]> path = new Stack <>();
+        for(double[] e = edgeTo[v]; e!= null; e = edgeTo[(int)getSrcNode(e)]){
+            path.push(e);
+        }
+        return path;
+    }
+
     private double getSrcNode(int[] edge) {
         return edge[0];
     }
@@ -61,19 +72,9 @@ public class DijkstraOneToOne {
     private double getCost(int[] edge) {
         return edge[2];
     }
+
     public boolean hasPathTo(int v){
         return distTo[v] < Double.POSITIVE_INFINITY;
-    }
-
-    public Iterable<double[]> pathTo(int v){
-        if(!hasPathTo(v)){
-            return null;
-        }
-        Stack<double[]> path = new Stack <>();
-        for(double[] e = edgeTo[v]; e!= null; e = edgeTo[(int)getSrcNode(e)]){
-            path.push(e);
-        }
-        return path;
     }
 
 }
