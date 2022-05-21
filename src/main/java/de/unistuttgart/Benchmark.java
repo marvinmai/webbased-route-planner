@@ -14,19 +14,30 @@ public class Benchmark {
 		String quePath = args[7];
 		int sourceNodeId = Integer.parseInt(args[9]);
 
+		AdjacencyArray adjacencyArray;
+
 		// run benchmarks
 		System.out.println("Reading graph file and creating graph data structure (" + graphPath + ")");
 		long graphReadStart = System.currentTimeMillis();
 
+		DataReader dataReader = new DataReader();
+		dataReader.readData(graphPath);
 
 		long graphReadEnd = System.currentTimeMillis();
 		System.out.println("\tgraph read took " + (graphReadEnd - graphReadStart) + "ms");
 
 		System.out.println("Setting up closest node data structure...");
 
+		CoordinatesSet coordinatesSet = dataReader.getCoordinatesSet();
+		NearestCoordinateSelector nearestCoordinateSelector = new NearestCoordinateSelector(coordinatesSet);
+
 		System.out.println("Finding closest node to coordinates " + lon + " " + lat);
 		long nodeFindStart = System.currentTimeMillis();
 		double[] coords = {0.0, 0.0};
+
+		int nodeNumber = nearestCoordinateSelector.getForCoordinates(lat, lon).getNodeIndex();
+		coords[0] = coordinatesSet.getLongitudeFor(nodeNumber);
+		coords[1] = coordinatesSet.getLatitudeFor(nodeNumber);
 
 		long nodeFindEnd = System.currentTimeMillis();
 		System.out.println("\tfinding node took " + (nodeFindEnd - nodeFindStart) + "ms: " + coords[0] + ", " + coords[1]);
@@ -39,9 +50,13 @@ public class Benchmark {
 				int oneToOneSourceNodeId = Integer.parseInt(currLine.substring(0, currLine.indexOf(" ")));
 				int oneToOneTargetNodeId = Integer.parseInt(currLine.substring(currLine.indexOf(" ") + 1));
 				int oneToOneDistance = -42;
-				// TODO set oneToOneDistance to the distance from
-				// oneToOneSourceNodeId to oneToOneSourceNodeId as computed by
-				// the one-to-one Dijkstra
+
+				adjacencyArray = dataReader.getAdjacencyArray();
+				DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, oneToOneSourceNodeId);
+				int targetNode = oneToOneTargetNodeId;
+				Iterable<double[]> path = dijkstra.pathTo(targetNode);
+				oneToOneDistance = DijkstraOneToOne.getCostsForPath(path);
+
 				System.out.println(oneToOneDistance);
 			}
 		} catch (Exception e) {
@@ -53,7 +68,11 @@ public class Benchmark {
 
 		System.out.println("Computing one-to-all Dijkstra from node id " + sourceNodeId);
 		long oneToAllStart = System.currentTimeMillis();
-		// TODO: run one-to-all Dijkstra here
+		
+		adjacencyArray = dataReader.getAdjacencyArray();
+		DijkstraOneToAll dijkstraOneToAll = new DijkstraOneToAll();
+		int[] distances = dijkstraOneToAll.calculateDistances(adjacencyArray,sourceNodeId);
+
 		long oneToAllEnd = System.currentTimeMillis();
 		System.out.println("\tone-to-all Dijkstra took " + (oneToAllEnd - oneToAllStart) + "ms");
 
@@ -61,8 +80,9 @@ public class Benchmark {
 		System.out.print("Enter target node id... ");
 		int targetNodeId = (new Scanner(System.in)).nextInt();
 		int oneToAllDistance = -42;
-		// TODO set oneToAllDistance to the distance from sourceNodeId to
-		// targetNodeId as computed by the one-to-all Dijkstra
+
+		oneToAllDistance = distances[targetNodeId];
+
 		System.out.println("Distance from " + sourceNodeId + " to " + targetNodeId + " is " + oneToAllDistance);
 	}
 
