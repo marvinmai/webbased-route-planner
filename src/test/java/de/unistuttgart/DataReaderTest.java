@@ -6,7 +6,7 @@ public class DataReaderTest {
 
     private static DataReader dataReader = new DataReader();
 
-    private String basePath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/";
+    private String basePath = System.getenv("ROUTE_PLANNER_BASE_PATH");
     private String toyPath = basePath + "toy.fmi";
     private String toyPath2 = basePath + "toy-2.fmi";
     private String germanyPath = basePath + "germany.fmi";
