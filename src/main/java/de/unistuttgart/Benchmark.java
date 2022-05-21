@@ -17,19 +17,16 @@ public class Benchmark {
 		// run benchmarks
 		System.out.println("Reading graph file and creating graph data structure (" + graphPath + ")");
 		long graphReadStart = System.currentTimeMillis();
-		// TODO: read graph here
 
 
 		long graphReadEnd = System.currentTimeMillis();
 		System.out.println("\tgraph read took " + (graphReadEnd - graphReadStart) + "ms");
 
 		System.out.println("Setting up closest node data structure...");
-		// TODO: set up closest node data structure here
 
 		System.out.println("Finding closest node to coordinates " + lon + " " + lat);
 		long nodeFindStart = System.currentTimeMillis();
 		double[] coords = {0.0, 0.0};
-		// TODO: find closest node here and write coordinates into coords
 
 		long nodeFindEnd = System.currentTimeMillis();
 		System.out.println("\tfinding node took " + (nodeFindEnd - nodeFindStart) + "ms: " + coords[0] + ", " + coords[1]);
