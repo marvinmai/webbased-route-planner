@@ -1,37 +1,25 @@
 package de.unistuttgart;
 
-public class Node {
-    private int index;
-    private double latitude;
-    private double longitude;
+public class Node implements Comparable {
 
-    public Node(int index, double latitude, double longitude) {
-        this.index = index;
-        this.latitude = latitude;
-        this.longitude = longitude;
+    private final int nodeID;
+    private final int costs;
+
+    Node(final int nodeID, final int costs){
+        this.nodeID = nodeID;
+        this.costs = costs;
     }
 
-    public int getIndex() {
-        return index;
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public int getNodeID() {
+        return nodeID;
     }
 
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public int getCosts() {
+        return costs;
     }
 }
