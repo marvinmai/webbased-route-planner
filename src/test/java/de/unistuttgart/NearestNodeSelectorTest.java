@@ -10,8 +10,8 @@ public class NearestNodeSelectorTest {
 
     private CoordinatesSet coordinatesSet;
 
-    private String toyPath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/toy.fmi";
-    private String germanyPath = "/home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/germany.fmi";
+    private String toyPath = System.getenv("ROUTE_PLANNER_BASE_PATH") + "toy.fmi";
+    private String germanyPath = System.getenv("ROUTE_PLANNER_BASE_PATH") + "germany.fmi";
 
     private DataReader dataReader = new DataReader();
 

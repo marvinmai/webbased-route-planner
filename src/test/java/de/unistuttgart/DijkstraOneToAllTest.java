@@ -10,7 +10,7 @@ public class DijkstraOneToAllTest {
     private CoordinatesSet coordinatesSet;
     private AdjacencyArray adjacencyArray;
 
-    private String basePath = "/Users/aminheidari/Documents/Uni/Programmierprojekt/Phase I/";
+    private String basePath = System.getenv("ROUTE_PLANNER_BASE_PATH");
     private String toyPath = basePath + "toy.fmi";
     private String toyPath2 = basePath + "toy-2.fmi";
     private String germanyPath = basePath + "germany.fmi";
