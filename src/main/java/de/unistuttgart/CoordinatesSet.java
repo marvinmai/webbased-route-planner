@@ -21,6 +21,15 @@ public class CoordinatesSet {
     public double[][] getCoordinates() {
         return coordinates;
     }
+
+    public double getLatitudeFor(int nodeId) {
+        return coordinates[nodeId][0];
+    }
+
+    public double getLongitudeFor(int nodeId) {
+        return coordinates[nodeId][1];
+    }
+
 }
 
 
