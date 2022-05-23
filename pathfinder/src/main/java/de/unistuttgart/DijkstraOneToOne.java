@@ -2,6 +2,7 @@ package de.unistuttgart;
 
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class DijkstraOneToOne {
 
@@ -55,6 +56,14 @@ public class DijkstraOneToOne {
             path.push(e);
         }
         return path;
+    }
+
+    public static int getCostsForPath(Iterable<double[]> path) {
+        AtomicInteger costs = new AtomicInteger();
+        path.forEach(node -> {
+            costs.addAndGet((int) node[2]);
+        });
+        return costs.get();
     }
 
     private double getSrcNode(int[] edge) {
