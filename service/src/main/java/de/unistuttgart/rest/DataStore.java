@@ -4,6 +4,7 @@ import de.unistuttgart.AdjacencyArray;
 import de.unistuttgart.CoordinatesSet;
 
 public class DataStore {
+    private static String fmiGraphFilePath;
     private static boolean dataAlreadyRead = false;
     private static AdjacencyArray adjacencyArray;
     private static CoordinatesSet coordinatesSet;
@@ -30,5 +31,13 @@ public class DataStore {
 
     public static void setDataAlreadyRead() {
         DataStore.dataAlreadyRead = true;
+    }
+
+    public static String getFmiGraphFilePath() {
+        return fmiGraphFilePath;
+    }
+
+    public static void setFmiGraphFilePath(String fmiGraphFilePath) {
+        DataStore.fmiGraphFilePath = fmiGraphFilePath;
     }
 }
