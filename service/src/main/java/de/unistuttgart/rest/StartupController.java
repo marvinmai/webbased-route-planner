@@ -26,13 +26,13 @@ public class StartupController {
         DataReader dataReader = new DataReader();
         String graphFile;
 
-        graphFile = System.getProperty("user.dir") + "/germany.fmi";
+        graphFile = DataStore.getFmiGraphFilePath();
         File f = new File(graphFile);
         if(!f.exists() || f.isDirectory()) {
             graphFile = Objects.requireNonNull(getClass().getClassLoader().getResource("toy.fmi")).getFile();
             Log.logInfo("Using default toy graph for routing.");
         } else {
-            Log.logInfo("Using germany graph for routing.");
+            Log.logInfo("Using germany graph for routing at " + DataStore.getFmiGraphFilePath());
         }
 
         dataReader.readData(graphFile);

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebbasedRoutePlannerApplication {
 
     public static void main(String[] args) {
+        DataStore.setFmiGraphFilePath(args[0]);
         SpringApplication.run(WebbasedRoutePlannerApplication.class, args);
     }
 }
