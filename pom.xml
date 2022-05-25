@@ -6,7 +6,7 @@
 
     <modules>
         <module>pathfinder</module>
-        <module>service</module>
+        <module>frontend</module>
         <module>webapp</module>
     </modules>
 
@@ -18,7 +18,7 @@
 
     <groupId>de.unistuttgart</groupId>
     <artifactId>webbased-route-planner</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
