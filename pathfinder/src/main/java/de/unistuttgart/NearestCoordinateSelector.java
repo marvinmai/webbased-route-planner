@@ -43,7 +43,7 @@ public class NearestCoordinateSelector {
      * @param squareSizeDegrees Side-length of the square in degrees. 0.1deg ~= 11.0574km
      * @return all nodes inside the given square
      */
-    public List<Coordinate> getNodesInSquareAround(double latNode, double longNode, double squareSizeDegrees) {
+    private List<Coordinate> getNodesInSquareAround(double latNode, double longNode, double squareSizeDegrees) {
         List<Coordinate> filteredCoordinates = new ArrayList<>();
 
         double lowerLong = longNode - squareSizeDegrees / 2;

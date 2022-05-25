@@ -1,0 +1,1 @@
+java -jar target/Benchmark-1.0.0.jar -graph /home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/germany.fmi -lon 9.098 -lat 48.746 -que /home/marvin/cloud/Data/Studium/SoSe22/Programmierprojekt/datasets/germany.que -s 638394

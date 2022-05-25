@@ -11,7 +11,10 @@ public class DataReader {
 
     private CoordinatesSet coordinatesSet;
 
+    private String filePath;
+
     public void readData(String filePath) {
+        this.filePath = filePath;
         BufferedReader reader;
         try {
             FileReader fileReader = new FileReader(filePath);
@@ -35,6 +38,10 @@ public class DataReader {
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getFilePath() {
+        return filePath;
     }
 
     private CoordinatesSet parseCoordinates(BufferedReader reader, int numberOfNodes, int numberOfEdges) throws IOException {
