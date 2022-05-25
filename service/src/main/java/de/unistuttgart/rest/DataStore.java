@@ -4,6 +4,7 @@ import de.unistuttgart.AdjacencyArray;
 import de.unistuttgart.CoordinatesSet;
 
 public class DataStore {
+    private static boolean dataAlreadyRead = false;
     private static AdjacencyArray adjacencyArray;
     private static CoordinatesSet coordinatesSet;
 
@@ -21,5 +22,13 @@ public class DataStore {
 
     public static void setCoordinatesSet(CoordinatesSet coordinatesSet) {
         DataStore.coordinatesSet = coordinatesSet;
+    }
+
+    public static boolean isDataAlreadyRead() {
+        return dataAlreadyRead;
+    }
+
+    public static void setDataAlreadyRead() {
+        DataStore.dataAlreadyRead = true;
     }
 }

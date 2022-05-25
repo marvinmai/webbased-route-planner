@@ -1,4 +1,4 @@
-package de.unistuttgart.rest;
+package de.unistuttgart.rest.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,5 +9,9 @@ public class Log {
 
     public static void logInfo(String message) {
         logger.info(message);
+    }
+
+    public static void logErr(String message) {
+        logger.error(message);
     }
 }
