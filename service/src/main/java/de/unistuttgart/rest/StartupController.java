@@ -1,6 +1,10 @@
 package de.unistuttgart.rest;
 
 import de.unistuttgart.DataReader;
+import de.unistuttgart.rest.errorhandling.DataReadAlreadyInProgressException;
+import de.unistuttgart.rest.util.Log;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +17,7 @@ public class StartupController {
     private boolean readInProgress = false;
 
     @GetMapping("/startup")
+    @EventListener(ApplicationReadyEvent.class)
     public boolean startup() throws DataReadAlreadyInProgressException {
         if (readInProgress) {
             throw new DataReadAlreadyInProgressException();
@@ -35,6 +40,8 @@ public class StartupController {
 
         DataStore.setAdjacencyArray(dataReader.getAdjacencyArray());
         DataStore.setCoordinatesSet(dataReader.getCoordinatesSet());
+        DataStore.setDataAlreadyRead();
+        Log.logInfo("Data loaded successfully. Service is ready.");
 
         return true;
     }
