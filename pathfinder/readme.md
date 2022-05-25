@@ -2,7 +2,7 @@ First, replace placeholders in build.sh and execute the script to start the mave
 If required execute 'chmod +x build.sh' first to make the script executable.
 
 To execute the benchmark of this project use the following command and replace the placeholders.
-You can use benchmark.sh for that. If necessary make this script executable first also.
+You can use benchmark.sh for that. Replace placeholders in the script first, too.
 
 java -jar target/Benchmark-X.X.jar -graph [...] -lon [...] -lat [...] -que [...] -s [...]
     - graph     Path to germany.fmi file
