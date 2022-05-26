@@ -13,33 +13,42 @@ export class MapComponent implements AfterViewInit {
   private map: any;
   private clickCoordinate: Coordinate | undefined;
   private markerSource: any;
+  private markerTarget: any;
 
   private popup = L.popup();
 
-  constructor(public mapService: MapService)
-  {
+  constructor(public mapService: MapService) {
   }
 
-  private onMapClick(e: { latlng: L.LatLngExpression; }):void {
+  private onMapClick(e: { latlng: L.LatLngExpression; }): void {
     console.log("Clicked at " + e.latlng);
     var l = L.latLng(e.latlng);
 
     this.mapService
       .getNearestNode(l.lat, l.lng)
       .subscribe(c => {
-        this.clickCoordinate = c
+        this.clickCoordinate = c;
         console.log(this.clickCoordinate);
 
-        if (this.markerSource != null) this.map.removeLayer(this.markerSource);
-        this.markerSource = L.marker([c.latitude, c.longitude]);
-        this.map.addLayer(this.markerSource);
+        if (this.markerSource == null && this.markerTarget == null) {
+          this.markerSource = L.marker([c.latitude, c.longitude]);
+          this.map.addLayer(this.markerSource);
+        } else if (this.markerSource != null && this.markerTarget == null) {
+          this.markerTarget = L.marker([c.latitude, c.longitude]);
+          this.map.addLayer(this.markerTarget);
+        } else if (this.markerSource != null && this.markerTarget != null) {
+          this.map.removeLayer(this.markerSource);
+          this.map.removeLayer(this.markerTarget);
+          this.markerSource = null;
+          this.markerTarget = null;
+        }
 
       });
   };
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [ 48.779044, 9.178734 ],
+      center: [48.779044, 9.178734],
       zoom: 12
     });
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

@@ -1,5 +1,5 @@
 export interface Coordinate {
   nodeIndex: number;
-  latitude: string;
+  latitude: number;
   longitude: number;
 }

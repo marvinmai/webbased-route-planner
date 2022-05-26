@@ -13,15 +13,11 @@ export class MapService {
   constructor(private http: HttpClient) { }
 
   getNearestNode(latitude: number, longitude: number): Observable<any> {
-    const url = this.nearestNodeUrl + '?latitude=' + latitude + '&longitude=' + longitude
+    const url = this.nearestNodeUrl + '?latitude=' + latitude + '&longitude=' + longitude;
     console.log(url);
     return this.http
       .get(url)
       .pipe(retry(1), catchError(this.handleError));
-  }
-
-  startup() {
-    return this.http.get(this.startupUrl).pipe(retry(1), catchError(this.handleError));
   }
 
   // Error handling
