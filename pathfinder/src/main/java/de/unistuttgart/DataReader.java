@@ -33,6 +33,7 @@ public class DataReader {
             coordinatesSet = parseCoordinates(reader, numberOfNodes, numberOfEdges);
             adjacencyArray = parseAdjacencyArray(reader, numberOfNodes, numberOfEdges);
 
+            reader.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (NullPointerException e) {
