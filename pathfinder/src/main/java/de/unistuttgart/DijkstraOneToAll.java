@@ -43,9 +43,10 @@ public class DijkstraOneToAll {
     private void adjacencyNodes(int node) {
         int edgeDistance = 0;
         int newDistance = 0;
-        for (int i = 0; i < adjacencyArray.getAdjacentNodes(node).size(); i++) {
-            int adjacentNodeID = adjacencyArray.getAdjacentNodes(node).get(i)[1];
-            int adjacentNodeCost = adjacencyArray.getAdjacentNodes(node).get(i)[2];
+        int[][] edges = adjacencyArray.getAdjacentNodes(node);
+        for (int i = 0; i < edges.length; i++) {
+            int adjacentNodeID = edges[i][1];
+            int adjacentNodeCost = edges[i][2];
             if (!settled.contains(adjacentNodeID)) {
                 edgeDistance = adjacentNodeCost;
                 newDistance = dist[node] + edgeDistance;
