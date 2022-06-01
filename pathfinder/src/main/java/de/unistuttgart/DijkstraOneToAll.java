@@ -8,7 +8,7 @@ public class DijkstraOneToAll {
     private Set<Integer> settled = new HashSet<>();
     private int numberOfNodes;
 
-    private PriorityQueue<Node> priorityQueue;
+    private Queue<Node> priorityQueue;
     private AdjacencyArray adjacencyArray;
 
     public DijkstraOneToAll() {
@@ -29,7 +29,6 @@ public class DijkstraOneToAll {
             if (priorityQueue.isEmpty()) {
                 break;
             }
-
             int u = priorityQueue.remove().getNodeID();
             if (settled.contains(u)) {
                 continue;
@@ -43,18 +42,32 @@ public class DijkstraOneToAll {
     private void adjacencyNodes(int node) {
         int edgeDistance = 0;
         int newDistance = 0;
-        for (int i = 0; i < adjacencyArray.getAdjacentNodes(node).size(); i++) {
+        int amountOfAdjacencyNodes = adjacencyArray.getAdjacentNodes(node).size();
+        for (int i = 0; i < amountOfAdjacencyNodes; i++) {
             int adjacentNodeID = adjacencyArray.getAdjacentNodes(node).get(i)[1];
             int adjacentNodeCost = adjacencyArray.getAdjacentNodes(node).get(i)[2];
-            if (!settled.contains(adjacentNodeID)) {
-                edgeDistance = adjacentNodeCost;
-                newDistance = dist[node] + edgeDistance;
+                if(!settled.contains(adjacentNodeID)){
+                    edgeDistance = adjacentNodeCost;
+                    newDistance = dist[node] + edgeDistance;
+                    if (newDistance < dist[adjacentNodeID]) {
+                        dist[adjacentNodeID] = newDistance;
 
-                if (newDistance < dist[adjacentNodeID]) {
-                    dist[adjacentNodeID] = newDistance;
+                    }
+                    priorityQueue.add(new Node(adjacentNodeID, newDistance));
                 }
-                priorityQueue.add(new Node(adjacentNodeID, adjacentNodeCost));
-            }
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
+}
 }
