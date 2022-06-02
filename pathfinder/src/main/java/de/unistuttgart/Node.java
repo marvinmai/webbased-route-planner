@@ -1,6 +1,6 @@
 package de.unistuttgart;
 
-public class Node implements Comparable {
+public class Node implements Comparable<Node>{
 
     private final int nodeID;
     private final int costs;
@@ -11,8 +11,13 @@ public class Node implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        return 0;
+    public int compareTo(Node n) {
+        if(n.getCosts() < this.getCosts()){
+            return 1;
+        }
+        else {
+            return -1;
+        }
     }
 
     public int getNodeID() {
