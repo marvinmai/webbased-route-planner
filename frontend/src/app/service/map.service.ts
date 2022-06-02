@@ -7,8 +7,8 @@ import {Coordinate} from "../model/coordinate";
 @Injectable()
 export class MapService {
 
-  private nearestNodeUrl = 'http://localhost:8080/nearest-node';
-  private startupUrl = 'http://localhost:8080/startup';
+  private nearestNodeUrl = 'http://localhost:8083/nearest-node';
+  private startupUrl = 'http://localhost:8083/startup';
 
   constructor(private http: HttpClient) { }
 
