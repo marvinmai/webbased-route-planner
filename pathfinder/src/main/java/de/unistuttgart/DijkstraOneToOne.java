@@ -1,5 +1,6 @@
 package de.unistuttgart;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -27,12 +28,10 @@ public class DijkstraOneToOne {
        whileloop: while (!pq.isEmpty()) {
             int v = pq.delMin();
             relax(adjArray, v);
-                if (v == targetNode) {
-                    System.out.println("stopping dijkstra earlier");
-
-                    break whileloop;
-                }
+            if (v == targetNode) {
+                break;
             }
+        }
 
     }
 
@@ -56,10 +55,10 @@ public class DijkstraOneToOne {
     }
 
     public Iterable<double[]> pathTo(int v) {
-        if (!hasPathTo(v)) {
-            return null;
-        }
         Stack<double[]> path = new Stack<>();
+        if (!hasPathTo(v)) {
+            return path;
+        }
         for (double[] e = edgeTo[v]; e != null; e = edgeTo[(int) getSrcNode(e)]) {
             path.push(e);
         }
@@ -68,6 +67,9 @@ public class DijkstraOneToOne {
 
     public static int getCostsForPath(Iterable<double[]> path) {
         AtomicInteger costs = new AtomicInteger();
+        if (((Stack<double[]>) path).size() == 0) {
+            return -1;
+        }
         path.forEach(node -> {
             costs.addAndGet((int) node[2]);
         });

@@ -45,6 +45,10 @@ public class DijkstraOneToOneTest {
             Assert.assertArrayEquals(expectedPath.get(i), e, 0.001);
             i++;
         }
+        System.out.println(DijkstraOneToOne.getCostsForPath(path));
+
+
+
     }
 
     @Test
@@ -57,7 +61,7 @@ public class DijkstraOneToOneTest {
         adjacencyArray= dataReader.getAdjacencyArray();
 
         int targetNode = 5;
-        DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, 0, targetNode);
+        DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, 1, targetNode);
 
         Iterable<double[]> path = dijkstra.pathTo(targetNode);
         List<double[]> expectedPath = new ArrayList<>();
