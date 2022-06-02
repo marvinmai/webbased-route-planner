@@ -13,7 +13,7 @@ public class DijkstraOneToOne {
     // priority queue of vertices
     private IndexMinPQ<Double> pq;
 
-    public DijkstraOneToOne(AdjacencyArray adjArray, int start) {
+    public DijkstraOneToOne(AdjacencyArray adjArray, int start, int targetNode) {
         edgeTo = new double[adjArray.getNumberOfNodes()][];
         distTo = new double[adjArray.getNumberOfNodes()];
         pq = new IndexMinPQ<>(adjArray.getNumberOfNodes());
@@ -23,16 +23,24 @@ public class DijkstraOneToOne {
         distTo[start] = 0.0;
 
         pq.insert(start, 0.0);
-        while(!pq.isEmpty()) {
-            relax(adjArray, pq.delMin());
-        }
+
+       whileloop: while (!pq.isEmpty()) {
+            int v = pq.delMin();
+            relax(adjArray, v);
+                if (v == targetNode) {
+                    System.out.println("stopping dijkstra earlier");
+
+                    break whileloop;
+                }
+            }
+
     }
 
     private void relax(AdjacencyArray adjArr, int v) {
         List<int[]> adjNodes = adjArr.getAdjacentNodes(v);
         if (adjNodes == null) return;
         double doubleNode[];
-        for (int[] node: adjNodes) {
+        for (int[] node : adjNodes) {
             int w = (int) getTargetNode(node);
             if (distTo[w] > distTo[v] + getCost(node)) {
                 distTo[w] = distTo[v] + getCost(node);
@@ -47,12 +55,12 @@ public class DijkstraOneToOne {
         }
     }
 
-    public Iterable<double[]> pathTo(int v){
-        if(!hasPathTo(v)){
+    public Iterable<double[]> pathTo(int v) {
+        if (!hasPathTo(v)) {
             return null;
         }
-        Stack<double[]> path = new Stack <>();
-        for(double[] e = edgeTo[v]; e!= null; e = edgeTo[(int)getSrcNode(e)]){
+        Stack<double[]> path = new Stack<>();
+        for (double[] e = edgeTo[v]; e != null; e = edgeTo[(int) getSrcNode(e)]) {
             path.push(e);
         }
         return path;
@@ -82,7 +90,7 @@ public class DijkstraOneToOne {
         return edge[2];
     }
 
-    public boolean hasPathTo(int v){
+    public boolean hasPathTo(int v) {
         return distTo[v] < Double.POSITIVE_INFINITY;
     }
 
