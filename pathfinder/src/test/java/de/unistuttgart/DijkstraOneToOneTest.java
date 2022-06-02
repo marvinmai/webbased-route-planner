@@ -30,9 +30,9 @@ public class DijkstraOneToOneTest {
         coordinatesSet = dataReader.getCoordinatesSet();
         adjacencyArray= dataReader.getAdjacencyArray();
 
-
-        DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, 0);
         int targetNode = 3;
+        DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, 0, targetNode);
+
         Iterable<double[]> path = dijkstra.pathTo(targetNode);
         List<double[]> expectedPath = new ArrayList<>();
         double node1 [] = {4.0, 3.0, 1.0};
@@ -45,6 +45,10 @@ public class DijkstraOneToOneTest {
             Assert.assertArrayEquals(expectedPath.get(i), e, 0.001);
             i++;
         }
+        System.out.println(DijkstraOneToOne.getCostsForPath(path));
+
+
+
     }
 
     @Test
@@ -56,9 +60,9 @@ public class DijkstraOneToOneTest {
         coordinatesSet = dataReader.getCoordinatesSet();
         adjacencyArray= dataReader.getAdjacencyArray();
 
-
-        DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, 0);
         int targetNode = 5;
+        DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, 1, targetNode);
+
         Iterable<double[]> path = dijkstra.pathTo(targetNode);
         List<double[]> expectedPath = new ArrayList<>();
         double node3 [] = {3.0, 5.0, 1.0};
@@ -92,13 +96,13 @@ public class DijkstraOneToOneTest {
         timer.stop();
         timer.start();
         adjacencyArray= dataReader.getAdjacencyArray();
-
+        int targetNode = 234232;
         System.out.println("calculating route.....");
-        DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, 0);
+        DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, 0, targetNode);
         System.out.println("route calculation finished.....");
         timer.stop();
 
-        int targetNode = 5;
+
         Iterable<double[]> path = dijkstra.pathTo(targetNode);
 
         memoryMeasure.stop();
@@ -121,10 +125,10 @@ public class DijkstraOneToOneTest {
         timer.stop();
         timer.start();
         adjacencyArray= dataReader.getAdjacencyArray();
-
+        int targetNode = 2414141;
         System.out.println("calculating route.....");
-        DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, 0);
-        int targetNode = 5;
+        DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, 0, targetNode);
+
         Iterable<double[]> path = dijkstra.pathTo(targetNode);
         System.out.println("route calculation finished.....");
         timer.stop();

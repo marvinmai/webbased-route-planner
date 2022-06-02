@@ -33,6 +33,7 @@ public class DataReader {
             coordinatesSet = parseCoordinates(reader, numberOfNodes, numberOfEdges);
             adjacencyArray = parseAdjacencyArray(reader, numberOfNodes, numberOfEdges);
 
+            reader.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (NullPointerException e) {
@@ -56,7 +57,7 @@ public class DataReader {
     }
 
     private AdjacencyArray parseAdjacencyArray(BufferedReader reader, int numberOfNodes, int numberOfEdges) throws IOException {
-        AdjacencyArray adjArray = new AdjacencyArray(numberOfNodes);
+        AdjacencyArray adjArray = new AdjacencyArray(numberOfEdges, numberOfNodes);
 
         String[] lineElements;
         int currentSourceNode;
@@ -70,7 +71,7 @@ public class DataReader {
                 lastSourceNode++;
             }
 
-            adjArray.addNode(
+            adjArray.addEdge(
                     currentSourceNode,
                     Integer.parseInt(lineElements[1]),
                     Integer.parseInt(lineElements[2]));
