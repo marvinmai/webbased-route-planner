@@ -1,43 +1,60 @@
 package de.unistuttgart;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class AdjacencyArray {
 
-    private List<int[]>[] nodes;
-
-    private List<int[]> currentList;
+    private int[] nodeEdgeReferences;
+    private int[][] edges;
 
     private int numberOfNodes;
+    private int numberOfEdges;
 
-    private int currentIndex;
+    private int currentNodeIndex;
+    private int lastNodeIndex;
 
-    public AdjacencyArray(int numberOfNodes) {
-        this.nodes = new LinkedList[numberOfNodes];
-        currentList = new LinkedList<>();
-        currentIndex = 0;
+    private int currentEdgeIndex;
+
+    public AdjacencyArray(int numberOfEdges, int numberOfNodes) {
+        this.nodeEdgeReferences = new int[numberOfNodes];
+        this.edges = new int[numberOfEdges][3];
+
+        currentNodeIndex = 0;
+        lastNodeIndex = 0;
+
+        currentEdgeIndex = 0;
         this.numberOfNodes = numberOfNodes;
+        this.numberOfEdges = numberOfEdges;
     }
 
-    public void addNode(int srcNode, int targetNode, int cost) {
-        int[] node = new int[3];
-        node[0] = srcNode;
-        node[1] = targetNode;
-        node[2] = cost;
-        currentList.add(node);
+    public void addEdge(int srcNode, int targetNode, int cost) {
+        currentNodeIndex = srcNode;
+        if (lastNodeIndex != currentNodeIndex) {
+            nodeEdgeReferences[srcNode] = currentEdgeIndex;
+        }
+        lastNodeIndex = srcNode;
+        edges[currentEdgeIndex][0] = srcNode;
+        edges[currentEdgeIndex][1] = targetNode;
+        edges[currentEdgeIndex][2] = cost;
+        currentEdgeIndex++;
     }
 
     public void next() {
-        if (currentIndex < numberOfNodes) {
-            nodes[currentIndex] = currentList;
-            currentIndex++;
-            currentList = new LinkedList<>();
+        if (currentNodeIndex < numberOfNodes) {
+            currentNodeIndex++;
         }
     }
 
-    public List<int[]> getAdjacentNodes(int nodeIndex) {
-        return nodes[nodeIndex];
+    public int[][] getAdjacentNodes(int nodeIndex) {
+        int numberOfEdgesForNode = 0;
+        int nodeEdgeReference = nodeEdgeReferences[nodeIndex];
+        int tempId = nodeEdgeReference;
+        while (tempId < edges.length && edges[tempId++][0] == nodeIndex) {
+            numberOfEdgesForNode++;
+        }
+        return Arrays.copyOfRange(edges, nodeEdgeReference, nodeEdgeReference + numberOfEdgesForNode);
     }
 
     public int getNumberOfNodes() {

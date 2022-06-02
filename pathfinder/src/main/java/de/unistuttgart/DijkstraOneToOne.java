@@ -1,5 +1,6 @@
 package de.unistuttgart;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,7 +14,7 @@ public class DijkstraOneToOne {
     // priority queue of vertices
     private IndexMinPQ<Double> pq;
 
-    public DijkstraOneToOne(AdjacencyArray adjArray, int start) {
+    public DijkstraOneToOne(AdjacencyArray adjArray, int start, int targetNode) {
         edgeTo = new double[adjArray.getNumberOfNodes()][];
         distTo = new double[adjArray.getNumberOfNodes()];
         pq = new IndexMinPQ<>(adjArray.getNumberOfNodes());
@@ -23,16 +24,22 @@ public class DijkstraOneToOne {
         distTo[start] = 0.0;
 
         pq.insert(start, 0.0);
-        while(!pq.isEmpty()) {
-            relax(adjArray, pq.delMin());
+
+       whileloop: while (!pq.isEmpty()) {
+            int v = pq.delMin();
+            relax(adjArray, v);
+            if (v == targetNode) {
+                break;
+            }
         }
+
     }
 
     private void relax(AdjacencyArray adjArr, int v) {
-        List<int[]> adjNodes = adjArr.getAdjacentNodes(v);
+        int[][] adjNodes = adjArr.getAdjacentNodes(v);
         if (adjNodes == null) return;
         double doubleNode[];
-        for (int[] node: adjNodes) {
+        for (int[] node : adjNodes) {
             int w = (int) getTargetNode(node);
             if (distTo[w] > distTo[v] + getCost(node)) {
                 distTo[w] = distTo[v] + getCost(node);
@@ -47,12 +54,12 @@ public class DijkstraOneToOne {
         }
     }
 
-    public Iterable<double[]> pathTo(int v){
-        if(!hasPathTo(v)){
-            return null;
+    public Iterable<double[]> pathTo(int v) {
+        Stack<double[]> path = new Stack<>();
+        if (!hasPathTo(v)) {
+            return path;
         }
-        Stack<double[]> path = new Stack <>();
-        for(double[] e = edgeTo[v]; e!= null; e = edgeTo[(int)getSrcNode(e)]){
+        for (double[] e = edgeTo[v]; e != null; e = edgeTo[(int) getSrcNode(e)]) {
             path.push(e);
         }
         return path;
@@ -60,6 +67,9 @@ public class DijkstraOneToOne {
 
     public static int getCostsForPath(Iterable<double[]> path) {
         AtomicInteger costs = new AtomicInteger();
+        if (((Stack<double[]>) path).size() == 0) {
+            return -1;
+        }
         path.forEach(node -> {
             costs.addAndGet((int) node[2]);
         });
@@ -82,7 +92,7 @@ public class DijkstraOneToOne {
         return edge[2];
     }
 
-    public boolean hasPathTo(int v){
+    public boolean hasPathTo(int v) {
         return distTo[v] < Double.POSITIVE_INFINITY;
     }
 
