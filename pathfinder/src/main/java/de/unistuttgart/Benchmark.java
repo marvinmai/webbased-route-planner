@@ -50,10 +50,10 @@ public class Benchmark {
 				int oneToOneSourceNodeId = Integer.parseInt(currLine.substring(0, currLine.indexOf(" ")));
 				int oneToOneTargetNodeId = Integer.parseInt(currLine.substring(currLine.indexOf(" ") + 1));
 				int oneToOneDistance = -42;
-
-				adjacencyArray = dataReader.getAdjacencyArray();
-				DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, oneToOneSourceNodeId);
 				int targetNode = oneToOneTargetNodeId;
+				adjacencyArray = dataReader.getAdjacencyArray();
+				DijkstraOneToOne dijkstra = new DijkstraOneToOne(adjacencyArray, oneToOneSourceNodeId, targetNode);
+
 				Iterable<double[]> path = dijkstra.pathTo(targetNode);
 				oneToOneDistance = DijkstraOneToOne.getCostsForPath(path);
 
