@@ -31,7 +31,7 @@ public class PathRoutingController {
     public void calculateShortestPath(
             @RequestParam(value = "source-node") int sourceNode,
             @RequestParam(value = "target-node") int targetNode) {
-        DijkstraOneToOne dijkstraOneToOne = new DijkstraOneToOne(DataStore.getAdjacencyArray(), sourceNode);
+        DijkstraOneToOne dijkstraOneToOne = new DijkstraOneToOne(DataStore.getAdjacencyArray(), sourceNode, targetNode);
 
         Iterable<double[]> path = dijkstraOneToOne.pathTo(targetNode);
     }
