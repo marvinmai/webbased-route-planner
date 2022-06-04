@@ -52,7 +52,7 @@ public class DijkstraOneToAll {
                 if (newDistance < dist[adjacentNodeID]) {
                     dist[adjacentNodeID] = newDistance;
                 }
-                priorityQueue.add(new Node(adjacentNodeID, adjacentNodeCost));
+                priorityQueue.add(new Node(adjacentNodeID, newDistance));
             }
         }
     }
