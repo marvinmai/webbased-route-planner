@@ -6,6 +6,7 @@ import de.unistuttgart.DijkstraOneToOne;
 import de.unistuttgart.NearestCoordinateSelector;
 import de.unistuttgart.rest.model.Feature;
 import de.unistuttgart.rest.model.Geometry;
+import de.unistuttgart.rest.model.Properties;
 import de.unistuttgart.rest.model.RouteJson;
 import de.unistuttgart.rest.util.Log;
 import org.springframework.http.MediaType;
@@ -59,6 +60,7 @@ public class PathRoutingController {
         }
         geometry.setCoordinates(coordinates);
         feature.setGeometry(geometry);
+        feature.setProperties(new Properties());
         List<Feature> featureList = new ArrayList<>();
         featureList.add(feature);
         routeJson.setFeatures(featureList);
