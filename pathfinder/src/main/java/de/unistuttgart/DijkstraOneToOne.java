@@ -36,7 +36,7 @@ public class DijkstraOneToOne {
     }
 
     private void relax(AdjacencyArray adjArr, int v) {
-        List<int[]> adjNodes = adjArr.getAdjacentNodes(v);
+        int[][] adjNodes = adjArr.getAdjacentNodes(v);
         if (adjNodes == null) return;
         double doubleNode[];
         for (int[] node : adjNodes) {
