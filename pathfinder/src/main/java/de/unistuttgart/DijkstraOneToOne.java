@@ -1,8 +1,6 @@
 package de.unistuttgart;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class DijkstraOneToOne {
@@ -65,6 +63,30 @@ public class DijkstraOneToOne {
         return path;
     }
 
+    public List<Coordinate> translatePathToCoordinates(CoordinatesSet coordinatesSet, Iterable<double[]> path) {
+        List<Coordinate> pathCoordinates = new ArrayList<>();
+
+        Iterator<double[]> iter = path.iterator();
+        double[] edge = iter.next();
+
+        Coordinate coordinate = new Coordinate((int) getSrcNode(edge),
+                coordinatesSet.getLatitudeFor((int) getSrcNode(edge)),
+                coordinatesSet.getLongitudeFor((int) getSrcNode(edge)));
+        pathCoordinates.add(coordinate);
+        coordinate = new Coordinate((int) getTargetNode(edge),
+                coordinatesSet.getLatitudeFor((int) getTargetNode(edge)),
+                coordinatesSet.getLongitudeFor((int) getTargetNode(edge)));
+        pathCoordinates.add(coordinate);
+
+        iter.forEachRemaining(e -> {
+            Coordinate c = new Coordinate((int) e[0],
+                coordinatesSet.getLatitudeFor((int) getSrcNode(e)),
+                coordinatesSet.getLongitudeFor((int) getSrcNode(e)));
+            pathCoordinates.add(c);
+        });
+        return pathCoordinates;
+    }
+
     public static int getCostsForPath(Iterable<double[]> path) {
         AtomicInteger costs = new AtomicInteger();
         if (((Stack<double[]>) path).size() == 0) {
@@ -85,6 +107,10 @@ public class DijkstraOneToOne {
     }
 
     private double getTargetNode(int[] edge) {
+        return edge[1];
+    }
+
+    private double getTargetNode(double[] edge) {
         return edge[1];
     }
 
