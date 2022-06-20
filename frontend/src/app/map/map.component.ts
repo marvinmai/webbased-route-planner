@@ -1,8 +1,7 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import {MapService} from "../service/map.service"
 import * as L from 'leaflet';
 import {Coordinate} from "../model/coordinate";
-import {LatLng, latLng} from "leaflet";
 
 @Component({
   selector: 'app-map',
@@ -14,8 +13,8 @@ export class MapComponent implements AfterViewInit {
   private clickCoordinate: Coordinate | undefined;
   private markerSource: any;
   private markerTarget: any;
-
-  private popup = L.popup();
+  private sourceNodeId: number | undefined;
+  private targetNodeId: number | undefined;
 
   constructor(public mapService: MapService) {
   }
@@ -33,9 +32,18 @@ export class MapComponent implements AfterViewInit {
         if (this.markerSource == null && this.markerTarget == null) {
           this.markerSource = L.marker([c.latitude, c.longitude]);
           this.map.addLayer(this.markerSource);
+          this.sourceNodeId = c.nodeIndex;
         } else if (this.markerSource != null && this.markerTarget == null) {
           this.markerTarget = L.marker([c.latitude, c.longitude]);
           this.map.addLayer(this.markerTarget);
+          this.targetNodeId = c.nodeIndex;
+
+          this.mapService
+            .getShortestPath(this.sourceNodeId, this.targetNodeId)
+            .subscribe(geoJson => {
+              L.geoJSON(geoJson).addTo(this.map);
+            });
+
         } else if (this.markerSource != null && this.markerTarget != null) {
           this.map.removeLayer(this.markerSource);
           this.map.removeLayer(this.markerTarget);
