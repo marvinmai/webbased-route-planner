@@ -41,7 +41,7 @@ public class StartupController {
         DataStore.setAdjacencyArray(dataReader.getAdjacencyArray());
         DataStore.setCoordinatesSet(dataReader.getCoordinatesSet());
         DataStore.setDataAlreadyRead();
-        Log.logInfo("Data loaded successfully. Service is ready at http://localhost:8080.");
+        Log.logInfo("Data loaded successfully. Service is ready at http://localhost:" + DataStore.getApplicationPort() + ".");
 
         return true;
     }
