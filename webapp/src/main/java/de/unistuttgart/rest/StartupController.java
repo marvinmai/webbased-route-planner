@@ -3,7 +3,9 @@ package de.unistuttgart.rest;
 import de.unistuttgart.DataReader;
 import de.unistuttgart.rest.errorhandling.DataReadAlreadyInProgressException;
 import de.unistuttgart.rest.util.Log;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,9 @@ import java.util.Objects;
 public class StartupController {
 
     private boolean readInProgress = false;
+
+    @Autowired
+    private ConfigurableApplicationContext ctx;
 
     @GetMapping("/startup")
     @EventListener(ApplicationReadyEvent.class)
@@ -29,8 +34,11 @@ public class StartupController {
         graphFile = DataStore.getFmiGraphFilePath();
         File f = new File(graphFile);
         if(!f.exists() || f.isDirectory()) {
-            graphFile = Objects.requireNonNull(getClass().getClassLoader().getResource("toy.fmi")).getFile();
-            Log.logInfo("Using default toy graph for routing.");
+            Log.logErr("****************************************************");
+            Log.logErr("Graph file not found. Aborting application Startup.");
+            Log.logErr("****************************************************");
+            ctx.close();
+            return false;
         } else {
             Log.logInfo("Using germany graph for routing at " + DataStore.getFmiGraphFilePath());
         }
