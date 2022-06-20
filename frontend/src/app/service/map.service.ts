@@ -2,18 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import {Coordinate} from "../model/coordinate";
 
 @Injectable()
 export class MapService {
 
-  private nearestNodeUrl = 'http://localhost:8080/nearest-node';
-  private startupUrl = 'http://localhost:8080/startup';
+  private nearestNodeUrl = 'http://localhost:8083/nearest-node';
+  private shortestPathUrl = 'http://localhost:8083/shortestpath';
 
   constructor(private http: HttpClient) { }
 
   getNearestNode(latitude: number, longitude: number): Observable<any> {
     const url = this.nearestNodeUrl + '?latitude=' + latitude + '&longitude=' + longitude;
+    console.log(url);
+    return this.http
+      .get(url)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  getShortestPath(sourceNode: number | undefined, targetNode: number | undefined): Observable<any> {
+    const url = this.shortestPathUrl + '?source-node=' + sourceNode + '&target-node=' + targetNode;
     console.log(url);
     return this.http
       .get(url)
