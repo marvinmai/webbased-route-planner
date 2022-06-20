@@ -38,6 +38,7 @@ public class ApplicationStartupProcess {
             return false;
         } else {
             Log.logInfo("Using germany graph for routing at " + DataStore.getFmiGraphFilePath());
+            Log.logInfo("Data is loading...");
         }
 
         dataReader.readData(graphFile);
