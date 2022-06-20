@@ -7,4 +7,4 @@ replace the path in the last line with the correct path to the "germany.fmi" fil
 to log "Data loaded successfully. Service is ready at http://localhost:8083." Then you can access the site at http://localhost:8083.
 
 You can also start the website with the following command:
-java -jar webapp/target/webapp-0.0.1-SNAPSHOT.jar [path-to-germany.fmi]
+java -jar webapp/target/webapp-1.0.0.jar [path-to-germany.fmi]
