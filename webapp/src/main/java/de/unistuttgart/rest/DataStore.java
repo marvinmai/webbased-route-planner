@@ -8,6 +8,7 @@ public class DataStore {
     private static boolean dataAlreadyRead = false;
     private static AdjacencyArray adjacencyArray;
     private static CoordinatesSet coordinatesSet;
+    private static String applicationPort;
 
     public static AdjacencyArray getAdjacencyArray() {
         return adjacencyArray;
@@ -39,5 +40,13 @@ public class DataStore {
 
     public static void setFmiGraphFilePath(String fmiGraphFilePath) {
         DataStore.fmiGraphFilePath = fmiGraphFilePath;
+    }
+
+    public static String getApplicationPort() {
+        return applicationPort;
+    }
+
+    public static void setApplicationPort(String applicationPort) {
+        DataStore.applicationPort = applicationPort;
     }
 }

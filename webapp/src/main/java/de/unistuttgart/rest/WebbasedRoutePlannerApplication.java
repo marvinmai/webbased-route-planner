@@ -11,8 +11,9 @@ public class WebbasedRoutePlannerApplication {
     public static void main(String[] args) {
         DataStore.setFmiGraphFilePath(args[0]);
         SpringApplication app = new SpringApplication(WebbasedRoutePlannerApplication.class);
+        DataStore.setApplicationPort("8083");
         app.setDefaultProperties(Collections
-                .singletonMap("server.port", "8083"));
+                .singletonMap("server.port", DataStore.getApplicationPort()));
         app.run(args);
     }
 }
