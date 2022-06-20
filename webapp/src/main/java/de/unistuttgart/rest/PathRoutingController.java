@@ -41,7 +41,10 @@ public class PathRoutingController {
         DijkstraOneToOne dijkstraOneToOne = new DijkstraOneToOne(DataStore.getAdjacencyArray(), sourceNode, targetNode);
 
         Iterable<double[]> path = dijkstraOneToOne.pathTo(targetNode);
-        List<Coordinate> dijkstraCoordinates = dijkstraOneToOne.translatePathToCoordinates(DataStore.getCoordinatesSet(), path);
+        List<Coordinate> coords = dijkstraOneToOne.translatePathToCoordinates(DataStore.getCoordinatesSet(), path);
+        Log.logInfo("Calculated shortest path from source node " + coords.get(coords.size() - 1).getNodeIndex()
+                + " with " + coords.get(coords.size() - 1).toString() + " to target node " + coords.get(0).getNodeIndex()
+                + " with " + coords.get(0).toString());
 
         RouteJson routeJson = new RouteJson();
         routeJson.setType("FeatureCollection");
@@ -52,7 +55,7 @@ public class PathRoutingController {
         List<List<Double>> coordinates = new ArrayList<>();
 
         List<Double> coordinate;
-        for (Coordinate c: dijkstraCoordinates) {
+        for (Coordinate c: coords) {
             coordinate = new ArrayList<>();
             coordinate.add(c.getLongitude());
             coordinate.add(c.getLatitude());
