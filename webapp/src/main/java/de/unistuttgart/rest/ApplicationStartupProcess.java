@@ -7,21 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.event.EventListener;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.util.Objects;
 
-@RestController
-public class StartupController {
+@Component
+public class ApplicationStartupProcess {
 
     private boolean readInProgress = false;
 
     @Autowired
     private ConfigurableApplicationContext ctx;
 
-    @GetMapping("/startup")
     @EventListener(ApplicationReadyEvent.class)
     public boolean startup() throws DataReadAlreadyInProgressException {
         if (readInProgress) {
