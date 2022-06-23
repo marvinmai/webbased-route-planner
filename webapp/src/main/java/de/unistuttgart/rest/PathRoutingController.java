@@ -30,7 +30,7 @@ public class PathRoutingController {
         NearestCoordinateSelector nearestCoordinateSelector = new NearestCoordinateSelector(DataStore.getCoordinatesSet());
         Coordinate coordinate = nearestCoordinateSelector.getForCoordinates(latitude, longitude);
         Log.logInfo("Nearest node calculated for latitude=" + latitude + " and longitude=" + longitude + ". " +
-                "Result: id=" + coordinate.getNodeIndex() + "latitude=" + coordinate.getLatitude() + " and longitude=" + coordinate.getLongitude());
+                "Result: id=" + coordinate.getNodeIndex() + " latitude=" + coordinate.getLatitude() + " and longitude=" + coordinate.getLongitude());
         return coordinate;
     }
 
