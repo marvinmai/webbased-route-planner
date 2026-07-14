@@ -18,7 +18,7 @@
 
     <groupId>de.unistuttgart</groupId>
     <artifactId>webbased-route-planner</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <properties>

@@ -13,6 +13,7 @@ export class MapComponent implements AfterViewInit {
   private clickCoordinate: Coordinate | undefined;
   private markerSource: any;
   private markerTarget: any;
+  private path: any;
   private sourceNodeId: number | undefined;
   private targetNodeId: number | undefined;
 
@@ -41,14 +42,17 @@ export class MapComponent implements AfterViewInit {
           this.mapService
             .getShortestPath(this.sourceNodeId, this.targetNodeId)
             .subscribe(geoJson => {
-              L.geoJSON(geoJson).addTo(this.map);
+              this.path = L.geoJSON(geoJson);
+              this.map.addLayer(this.path);
             });
 
         } else if (this.markerSource != null && this.markerTarget != null) {
           this.map.removeLayer(this.markerSource);
           this.map.removeLayer(this.markerTarget);
+          this.map.removeLayer(this.path);
           this.markerSource = null;
           this.markerTarget = null;
+          this.path = null;
         }
 
       });
