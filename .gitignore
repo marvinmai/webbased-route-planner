@@ -1,2 +1,35 @@
 webapp/germany.fmi/
 
+# ---- Maven build output ----
+target/
+*/target/
+**/target/
+
+# ---- Node (downloaded by frontend build, e.g. via frontend-maven-plugin) ----
+frontend/node/
+node_modules/
+**/node_modules/
+
+# npm/yarn lock & log noise (optional — see note below)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ---- Compiled class files / jars produced by build ----
+*.class
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+
+# ---- IDE files ----
+*.iml
+.idea/
+.vscode/
+*.iws
+*.ipr
+
+# ---- OS junk ----
+.DS_Store
+Thumbs.db
+
+# ---- Logs ----
+*.log
