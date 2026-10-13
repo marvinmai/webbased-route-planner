@@ -1,2 +1,5 @@
-## replace path with your correct path to the file "germany.fmi"
-java -jar -Xmx8G webapp/target/webapp-1.0.0.jar /home/marvin/dev/studium-dev/Programmierprojekt/datasets/germany.fmi
+#!/usr/bin/env bash
+# Starts the web app (backend + frontend) on http://localhost:8083.
+# Usage: ./start.sh <path-to-germany.fmi>
+GRAPH_FILE="${1:?usage: ./start.sh <path-to-germany.fmi>}"
+java -jar -Xmx8G webapp/target/webapp-1.0.0.jar "$GRAPH_FILE"
