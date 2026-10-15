@@ -109,4 +109,3 @@ cd pathfinder
   one.
 - Connecting a Java backend and a single-page frontend through a REST API and
   shipping both as one jar.
-- Working in a team with feature branches, pull requests and release branches.
